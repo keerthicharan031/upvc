@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OUTLOOK ENTERPRISES | Premium UPVC Doors & Windows Solutions</title>
+  <meta name="description" content="Outlook Enterprises manufactures German-engineered soundproof UPVC doors, sliding windows, French doors, and partitions with 10-year warranty. Get instant quote online!">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+  <script>
+    (function() {
+      const path = (window.location.pathname.replace(/\/$/, '') || '/') ;
+      const blocked = ['/admin', '/admin-crm'];
+      const secretPath = '/admin-crm-outlook2024';
+      const adminSection = document.getElementById('admin-crm');
+
+      if (blocked.includes(path)) {
+        window.location.replace('/');
+        return;
+      }
+
+      if (path === secretPath) {
+        const password = window.prompt('Enter the admin access password:');
+        if (password === 'outlook2026') {
+          if (adminSection) {
+            adminSection.style.display = '';
+            document.title = 'Admin CRM Portal | Outlook Enterprises';
+            setTimeout(() => adminSection.scrollIntoView({ behavior: 'smooth' }), 100);
+          }
+          return;
+        }
+        window.location.replace('/');
+        return;
+      }
+
+      if (adminSection) {
+        adminSection.style.display = 'none';
+      }
+    })();
+  </script>
+
+
+  <!-- Header Navbar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo" style="display: flex; align-items: center; gap: 0.75rem;">
+        <img src="outlook-nextjs/public/logo.svg" alt="Outlook Enterprises Logo" style="width: 44px; height: 44px; filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.3));" />
+        <span>OUTLOOK <span class="text-gradient">ENTERPRISES</span></span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link active">Home</a></li>
+        <li><a href="#features" class="nav-link">Why UPVC</a></li>
+        <li><a href="#catalog" class="nav-link">Products</a></li>
+        <li><a href="#customizer" class="nav-link">Visualizer</a></li>
+        <li><a href="#calculator" class="nav-link">Price Calculator</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="icon-btn" title="Toggle Light/Dark Theme">
+          <span id="theme-toggle-icon">🌙</span>
+        </button>
+
+        <a href="https://wa.me/918072707041" target="_blank" class="btn btn-secondary" style="padding: 0.6rem 1.1rem; font-size: 0.88rem;">
+          💬 WhatsApp
+        </a>
+
+        <a href="#calculator" class="btn btn-primary">Instant Quote ⚡</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero">
+    <div class="hero-glow"></div>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="badge badge-blue">German Profile Technology & Anti-UV Protection</span>
+        <h1 class="hero-title">
+          Transform Spaces With <span class="text-gradient">Ultra-Quiet UPVC</span> Doors & Windows
+        </h1>
+        <p class="hero-subtitle">
+          Experience 42 dB soundproofing, 40% energy reduction, zero termite risk, and modern European aesthetics engineered for a lifetime.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#customizer" class="btn btn-primary">Design & Customize 🎨</a>
+          <a href="#calculator" class="btn btn-secondary">Calculate Price 🧮</a>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <h3>15,000+</h3>
+            <p>Windows Installed</p>
+          </div>
+          <div class="stat-item">
+            <h3>42 dB</h3>
+            <p>Noise Cut</p>
+          </div>
+          <div class="stat-item">
+            <h3>10 Years</h3>
+            <p>Solid Warranty</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-card-preview">
+        <div class="hero-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=80" alt="Luxury UPVC Glass Doors">
+        </div>
+        <div class="hero-floating-badge">
+          <div>
+            <h4 style="font-size: 1rem;">Lift & Slide Series</h4>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">Double Glazed Acoustic Glass (24mm)</p>
+          </div>
+          <span class="badge badge-green">Class 9A Seal</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features / Advantages -->
+  <section id="features" class="features-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-gold">Superior Engineering</span>
+        <h2 class="section-title">Engineered For Extreme Comfort & Longevity</h2>
+        <p class="section-desc">Why top architects and homeowners specify Outlook UPVC profile systems.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="glass-card feature-card">
+          <div class="feature-icon">🔊</div>
+          <h3>42 dB Acoustic Proofing</h3>
+          <p>Multi-chambered profiles paired with double-glazed acoustic glass block city traffic and street noise completely.</p>
+        </div>
+
+        <div class="glass-card feature-card">
+          <div class="feature-icon">❄️</div>
+          <h3>40% AC Energy Savings</h3>
+          <p>UPVC is a natural non-conductor of heat. Keep your indoors up to 8°C cooler in summer and reduce power bills.</p>
+        </div>
+
+        <div class="glass-card feature-card">
+          <div class="feature-icon">🛡️</div>
+          <h3>German Multi-Point Locks</h3>
+          <p>High-security shootbolts engage along multiple frame points, providing maximum anti-burglary protection.</p>
+        </div>
+
+        <div class="glass-card feature-card">
+          <div class="feature-icon">🌧️</div>
+          <h3>100% Water & Wind Tight</h3>
+          <p>Special fusion-welded corners and EPDM rubber seals guarantee zero water leakage even during heavy monsoon storms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Catalog -->
+  <section id="catalog" class="catalog-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-blue">Product Catalog</span>
+        <h2 class="section-title">Explore Our Premium UPVC Systems</h2>
+        <p class="section-desc">Custom crafted sliding windows, casement doors, French balconies, and acoustic partitions.</p>
+      </div>
+
+      <div class="catalog-filter">
+        <button class="filter-btn active" data-catalog-filter="all">All Systems</button>
+        <button class="filter-btn" data-catalog-filter="windows">UPVC Windows</button>
+        <button class="filter-btn" data-catalog-filter="doors">Patio & Balcony Doors</button>
+        <button class="filter-btn" data-catalog-filter="partitions">Acoustic Partitions</button>
+      </div>
+
+      <div id="product-catalog-grid" class="catalog-grid">
+        <!-- Rendered via App.renderProducts() -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Customizer Section -->
+  <section id="customizer" class="customizer-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-green">Real-time Visualizer</span>
+        <h2 class="section-title">Custom Window & Door Configurator</h2>
+        <p class="section-desc">Choose frame laminates, glass tints, grills, and hardware to visualize your custom window live.</p>
+      </div>
+
+      <div class="customizer-grid">
+        <!-- Left: Dynamic Live SVG Viewport -->
+        <div class="glass-card preview-viewport">
+          <div id="customizer-svg-container" class="svg-preview-container">
+            <!-- Rendered by CustomizerEngine -->
+          </div>
+
+          <div class="preview-meta">
+            <div>
+              <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Estimated Cost</span>
+              <span id="customizer-live-price" style="font-size: 1.6rem; font-weight: 800; color: var(--brand-primary);">₹ 21,500</span>
+            </div>
+          </div>
+          <p id="customizer-specs-summary" style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.6rem;"></p>
+        </div>
+
+        <!-- Right: Interactive Controls -->
+        <div class="glass-card customizer-controls">
+          <div class="control-group">
+            <label class="control-label">1. Select System Type</label>
+            <div class="chip-select">
+              <button class="option-chip active" data-customizer-type="sliding-win">2-Track Sliding Window</button>
+              <button class="option-chip" data-customizer-type="french-door">French Balcony Door</button>
+              <button class="option-chip" data-customizer-type="arch-win">Arch Casement Window</button>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">2. Select Profile Lamination Finish</label>
+            <div class="swatch-group">
+              <div class="color-swatch active" data-customizer-color="white" style="background: #ffffff; border-color: #cbd5e1;">
+                <span class="swatch-label">Classic White</span>
+              </div>
+              <div class="color-swatch" data-customizer-color="walnut" style="background: #3d2314;">
+                <span class="swatch-label">Dark Walnut</span>
+              </div>
+              <div class="color-swatch" data-customizer-color="oak" style="background: #8c5627;">
+                <span class="swatch-label">Golden Oak</span>
+              </div>
+              <div class="color-swatch" data-customizer-color="anthracite" style="background: #334155;">
+                <span class="swatch-label">Anthracite Grey</span>
+              </div>
+              <div class="color-swatch" data-customizer-color="black" style="background: #0f172a;">
+                <span class="swatch-label">Jet Black</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group" style="margin-top: 2rem;">
+            <label class="control-label">3. Select Glass Glazing Type</label>
+            <div class="chip-select">
+              <button class="option-chip" data-customizer-glass="single">6mm Toughened</button>
+              <button class="option-chip active" data-customizer-glass="double">24mm Double Glazed</button>
+              <button class="option-chip" data-customizer-glass="low-e">Low-E Thermal Shield</button>
+              <button class="option-chip" data-customizer-glass="tinted">Solar Blue Tint</button>
+              <button class="option-chip" data-customizer-glass="frosted">Frosted Privacy</button>
+            </div>
+          </div>
+
+          <div class="control-group" style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+            <div>
+              <label class="control-label" for="customizer-grill">Grill / Georgian Bars</label>
+              <select id="customizer-grill" class="form-control" style="width: 180px;">
+                <option value="none">No Grills (Clear View)</option>
+                <option value="colonial">Colonial Grid</option>
+                <option value="cross">Cross Bars</option>
+              </select>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-top: 1.5rem;">
+              <input type="checkbox" id="customizer-mesh" checked style="width: 18px; height: 18px;" />
+              <label for="customizer-mesh" style="font-weight: 600; font-size: 0.9rem;">SS Insect Mesh</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Instant Smart Calculator -->
+  <section id="calculator" class="calculator-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-gold">Transparent Pricing</span>
+        <h2 class="section-title">Instant Quotation & Cost Estimator</h2>
+        <p class="section-desc">Enter your room dimensions to receive an instant itemized estimate with tax & installation.</p>
+      </div>
+
+      <div class="glass-card calc-box">
+        <div class="calc-inputs">
+          <div class="dimension-row">
+            <div class="form-group">
+              <label>Width (Feet)</label>
+              <input type="number" id="calc-width" class="form-control" value="6" min="1" max="25" step="0.5" />
+            </div>
+
+            <div class="form-group">
+              <label>Height (Feet)</label>
+              <input type="number" id="calc-height" class="form-control" value="4" min="1" max="15" step="0.5" />
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="form-group">
+              <label>Quantity of Units</label>
+              <input type="number" id="calc-qty" class="form-control" value="2" min="1" max="50" />
+            </div>
+
+            <div class="form-group">
+              <label>System Type</label>
+              <select id="calc-type" class="form-control">
+                <option value="450">Sliding Window (Standard)</option>
+                <option value="580">Tilt & Turn European Window</option>
+                <option value="750">Lift & Slide Heavy Patio Door</option>
+                <option value="520">French Balcony Door</option>
+                <option value="490">Acoustic Glass Partition</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="form-group">
+              <label>Profile Color</label>
+              <select id="calc-color" class="form-control">
+                <option value="white">Classic White Profile</option>
+                <option value="walnut">Dark Walnut Wood Grain (+15%)</option>
+                <option value="oak">Golden Oak Laminated (+15%)</option>
+                <option value="anthracite">Anthracite Grey Matte (+12%)</option>
+                <option value="black">Jet Black Matte (+18%)</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Glass Upgrade</label>
+              <select id="calc-glass" class="form-control">
+                <option value="single">6mm Single Toughened</option>
+                <option value="double" selected>24mm Double Glazed DGU (+25%)</option>
+                <option value="low-e">Low-E Thermal Shield (+40%)</option>
+                <option value="tinted">Solar Reflective Tint (+20%)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="dimension-row">
+            <div class="form-group">
+              <label>Lock Hardware</label>
+              <select id="calc-lock" class="form-control">
+                <option value="0">Standard Single Lock</option>
+                <option value="1500" selected>German Multi-Point Shootbolt (+ ₹1,500/unit)</option>
+                <option value="4500">Biometric Smart Digital Handle (+ ₹4,500/unit)</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="display: flex; align-items: center; gap: 0.6rem; margin-top: 1.8rem;">
+              <input type="checkbox" id="calc-mesh" checked style="width: 20px; height: 20px;" />
+              <label for="calc-mesh" style="font-weight: 700;">Include SS Insect Mesh Screen</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Receipt Card -->
+        <div class="glass-card calc-receipt">
+          <h3 class="receipt-title">Live Quote Summary</h3>
+
+          <div class="receipt-row">
+            <span>Total Area:</span>
+            <strong id="receipt-sqft">48.0 sq. ft (2 Units)</strong>
+          </div>
+
+          <div class="receipt-row">
+            <span>Material & Profile Fabrication:</span>
+            <span id="receipt-material">₹ 28,800</span>
+          </div>
+
+          <div class="receipt-row">
+            <span>On-Site Installation & Silicone:</span>
+            <span id="receipt-install">₹ 2,160</span>
+          </div>
+
+          <div class="receipt-row">
+            <span>GST (18% Statutory):</span>
+            <span id="receipt-gst">₹ 5,573</span>
+          </div>
+
+          <div class="receipt-row total">
+            <span>Net Estimated Total:</span>
+            <span id="receipt-total">₹ 36,533</span>
+          </div>
+
+          <button id="calc-download-btn" class="btn btn-primary" style="margin-top: 2rem; width: 100%;">
+            📄 Download Official Quote PDF
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Showcase -->
+  <section id="projects" class="projects-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="badge badge-blue">Portfolio Gallery</span>
+        <h2 class="section-title">Recent Completed Installations</h2>
+        <p class="section-desc">Take a look at our landmark residential villas, penthouses, and commercial headquarters.</p>
+      </div>
+
+      <div id="projects-grid" class="project-grid">
+        <!-- Rendered via App.renderProjects() -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Request & Lead Booking -->
+  <section id="quote-request" class="features-section" style="background: var(--bg-secondary);">
+    <div class="container" style="max-width: 800px;">
+      <div class="glass-card" style="padding: 3rem;">
+        <div class="section-header" style="margin-bottom: 2rem;">
+          <span class="badge badge-green">Free Consultation</span>
+          <h2 class="section-title">Schedule Free Site Measurement</h2>
+          <p class="section-desc">Our expert engineer will visit your location with sample profile kits.</p>
+        </div>
+
+        <form id="quote-request-form">
+          <div class="dimension-row">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" name="name" class="form-control" placeholder="e.g. Ramesh Kumar" required />
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" name="phone" class="form-control" placeholder="+91 98765 43210" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Product Requirement</label>
+            <select name="product" class="form-control">
+              <option value="Sliding Windows">Sliding Windows</option>
+              <option value="Lift & Slide Doors">Lift & Slide Doors</option>
+              <option value="Tilt & Turn Windows">Tilt & Turn Windows</option>
+              <option value="French Balcony Doors">French Balcony Doors</option>
+              <option value="Acoustic Partitions">Acoustic Partitions</option>
+              <option value="Entire Villa Package">Entire Villa / House Package</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Project Details / Site Address</label>
+            <textarea name="notes" class="form-control" rows="3" placeholder="Provide approximate window count or site location..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.05rem; padding: 1rem;">
+            🚀 Submit Request & Log Lead
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- CRM Admin Portal Simulator -->
+  <section id="admin-crm" class="admin-section" style="display: none;">
+    <div class="container">
+      <div class="admin-header">
+        <div>
+          <span class="badge badge-gold">Executive Control Center</span>
+          <h2 class="section-title" style="margin-bottom: 0.2rem;">CRM & Sales Dashboard</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Real-time lead tracking, revenue metrics, and quotation pipeline management.</p>
+        </div>
+
+        <div style="display: flex; gap: 0.8rem;">
+          <select id="admin-lead-filter" class="form-control" style="width: 180px;">
+            <option value="all">All Pipeline Leads</option>
+            <option value="New">Status: New</option>
+            <option value="Visit">Status: Site Visit</option>
+            <option value="Quote">Status: Quote Sent</option>
+            <option value="Won">Status: Won / Confirmed</option>
+          </select>
+          <button id="admin-export-csv" class="btn btn-secondary">📥 Export CSV</button>
+        </div>
+      </div>
+
+      <!-- Metrics Cards Grid -->
+      <div class="metrics-grid">
+        <div class="glass-card metric-card">
+          <div class="metric-icon">👥</div>
+          <div class="metric-data">
+            <h4 id="metric-total-leads">4</h4>
+            <p>Active Inquiries</p>
+          </div>
+        </div>
+
+        <div class="glass-card metric-card">
+          <div class="metric-icon">📈</div>
+          <div class="metric-data">
+            <h4 id="metric-conversion">25%</h4>
+            <p>Lead Conversion Rate</p>
+          </div>
+        </div>
+
+        <div class="glass-card metric-card">
+          <div class="metric-icon">🏆</div>
+          <div class="metric-data">
+            <h4 id="metric-won-orders">1</h4>
+            <p>Confirmed Orders</p>
+          </div>
+        </div>
+
+        <div class="glass-card metric-card">
+          <div class="metric-icon">💰</div>
+          <div class="metric-data">
+            <h4>₹ 12.2 L</h4>
+            <p>Pipeline Value</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Admin Charts Grid -->
+      <div class="admin-charts-grid">
+        <div class="glass-card chart-card">
+          <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Monthly Order Value Growth (INR)</h4>
+          <div class="chart-wrapper">
+            <canvas id="salesChart"></canvas>
+          </div>
+        </div>
+
+        <div class="glass-card chart-card" style="display: flex; flex-direction: column; justify-content: center;">
+          <h4 style="margin-bottom: 1rem; color: var(--text-muted);">Lead Sources Breakdown</h4>
+          <div style="font-size: 0.9rem; line-height: 2;">
+            <div style="display: flex; justify-content: space-between;">
+              <span>🌐 Web Calculator</span>
+              <strong>48%</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>💬 WhatsApp Inquiry</span>
+              <strong>32%</strong>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span>🏛️ Architect Referrals</span>
+              <strong>20%</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lead Management Pipeline Table -->
+      <div class="glass-card lead-table-container">
+        <table class="lead-table">
+          <thead>
+            <tr>
+              <th>Lead ID</th>
+              <th>Customer Name</th>
+              <th>Phone</th>
+              <th>Product System</th>
+              <th>Est. Value</th>
+              <th>Pipeline Status (Click to Advance)</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="admin-lead-tbody">
+            <!-- Rendered by AdminEngine -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI Chatbot Widget -->
+  <div class="chatbot-widget">
+    <div id="chat-window" class="glass-card chat-window">
+      <div class="chat-header">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <div style="width: 32px; height: 32px; border-radius: 50%; background: #fff; color: var(--brand-primary); display: flex; align-items: center; justify-content: center; font-weight: bold;">AI</div>
+          <div>
+            <h4 style="font-size: 0.95rem;">Outlook AI Specialist</h4>
+            <span style="font-size: 0.7rem; opacity: 0.85;">Online | Instant Assistance</span>
+          </div>
+        </div>
+        <button id="chat-close-btn" style="background: none; border: none; color: #fff; font-size: 1.2rem; cursor: pointer;">✕</button>
+      </div>
+
+      <div id="chat-messages" class="chat-messages">
+        <!-- Dynamic chat bubbles -->
+      </div>
+
+      <div style="padding: 0.5rem 1rem; display: flex; gap: 0.4rem; overflow-x: auto; background: var(--bg-secondary);">
+        <button class="option-chip" data-chat-prompt="What is the price per sq ft?" style="font-size: 0.75rem; padding: 0.3rem 0.6rem;">💰 Pricing</button>
+        <button class="option-chip" data-chat-prompt="Why choose UPVC over Aluminum?" style="font-size: 0.75rem; padding: 0.3rem 0.6rem;">⚡ Benefits</button>
+        <button class="option-chip" data-chat-prompt="Book free site measurement" style="font-size: 0.75rem; padding: 0.3rem 0.6rem;">📍 Site Visit</button>
+      </div>
+
+      <div class="chat-input-area">
+        <input type="text" id="chat-input" class="form-control" placeholder="Ask about pricing, warranty, acoustic proofing..." />
+        <button id="chat-send-btn" class="btn btn-primary" style="padding: 0.8rem 1rem;">➤</button>
+      </div>
+    </div>
+
+    <button id="chat-toggle-btn" class="chat-toggle-btn" title="Ask Outlook AI">💬</button>
+  </div>
+
+  <!-- Footer -->
+  <footer style="background: var(--bg-secondary); border-top: 1px solid var(--surface-glass-border); padding: 4rem 0 2rem; margin-top: 4rem;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; margin-bottom: 3rem;">
+        <div>
+          <a href="#" class="brand-logo" style="margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+            <img src="outlook-nextjs/public/logo.svg" alt="Outlook Enterprises Logo" style="width: 36px; height: 36px; filter: drop-shadow(0 4px 10px rgba(245, 158, 11, 0.3));" />
+            <span>OUTLOOK <span class="text-gradient">ENTERPRISES</span></span>
+          </a>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Enterprise UPVC doors and windows solutions engineered for noise insulation, thermal efficiency, and modern architectural luxury.</p>
+        </div>
+
+        <div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 1rem;">Quick Navigation</h4>
+          <ul style="list-style: none; line-height: 2; font-size: 0.9rem; color: var(--text-muted);">
+            <li><a href="#catalog">Product Catalog</a></li>
+            <li><a href="#customizer">Visual Configurator</a></li>
+            <li><a href="#calculator">Instant Cost Estimator</a></li>
+            <li><a href="#admin-crm">Admin CRM Portal</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="font-size: 1.1rem; margin-bottom: 1rem;">Contact Us</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.8;">
+            👤 <strong>Partners:</strong> Saravanavel & Durai<br>
+            📍 No.7, 3rd Street, Sasthri Nagar, Adambakkam, Chennai – 600 088<br>
+            🌐 <a href="https://www.outlookenterprises.in" target="_blank" style="color: inherit; text-decoration: underline;">www.outlookenterprises.in</a><br>
+            ✉️ <a href="mailto:outlookenterprises2@gmail.com" style="color: inherit;">outlookenterprises2@gmail.com</a><br>
+            📞 <a href="tel:+918072707041" style="color: inherit;">+91 80727 07041</a> / <a href="tel:+917010198326" style="color: inherit;">+91 70101 98326</a>
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align: center; border-top: 1px solid var(--surface-glass-border); padding-top: 1.8rem; font-size: 0.85rem; color: var(--text-muted);">
+        © 2026 Outlook Enterprises. All Rights Reserved. Manufactured with 100% lead-free German profiles.
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="scripts/data.js"></script>
+  <script src="scripts/customizer.js"></script>
+  <script src="scripts/calculator.js"></script>
+  <script src="scripts/admin.js"></script>
+  <script src="scripts/chatbot.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

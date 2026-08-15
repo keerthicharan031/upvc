@@ -1,0 +1,15 @@
+{
+  "name": "upvc-enterprise-suite",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Outlook Enterprises UPVC Doors & Windows Web Application Suite",
+  "scripts": {
+    "dev": "npm --prefix outlook-nextjs run dev",
+    "build": "npm --prefix outlook-nextjs run build",
+    "start": "npm --prefix outlook-nextjs run start",
+    "lint": "npm --prefix outlook-nextjs run lint"
+  },
+  "workspaces": [
+    "outlook-nextjs"
+  ]
+}
