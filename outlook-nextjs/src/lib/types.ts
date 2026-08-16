@@ -29,12 +29,15 @@ export interface Lead {
   id: string;
   name: string;
   phone: string;
+  email?: string;
   product: string;
   area: string;
   value: string;
   status: LeadStatus;
   date: string;
-  source?: 'Web Calculator' | 'WhatsApp' | 'Architect Referral' | 'Visualizer';
+  notes?: string;
+  created_at?: string;
+  source?: 'Web Calculator' | 'WhatsApp' | 'Architect Referral' | 'Visualizer' | 'Direct Enquiry' | string;
   config?: VisualizerConfig | CalculatorConfig;
 }
 
@@ -102,3 +105,17 @@ export interface LeadSourceData {
   value: number;
   color: string;
 }
+
+export interface Review {
+  id: string;
+  name: string;
+  location: string;
+  rating: number; // 1 to 5
+  product: string;
+  comment: string;
+  date: string;
+  verified?: boolean;
+  avatarBg?: string;
+  created_at?: string;
+}
+

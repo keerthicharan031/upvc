@@ -364,6 +364,7 @@ function ConsultationBand() {
 }
 
 import AnimatedHero from '@/components/ui/AnimatedHero';
+import ReviewsSection from '@/components/ui/ReviewsSection';
 
 export default function HomePage() {
   return (
@@ -372,7 +373,9 @@ export default function HomePage() {
       <WhyUPVCSection />
       <ProductsPreviewSection />
       <ProjectsTeaserSection />
+      <ReviewsSection />
       <ConsultationBand />
     </>
   );
 }
+

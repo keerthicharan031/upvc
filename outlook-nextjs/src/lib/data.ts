@@ -1,5 +1,5 @@
 // Outlook Enterprises — Seed Data Store
-import type { Product, Project, Lead, ProfileColor, GlassType, HardwareOption, MonthlyData, LeadSourceData } from './types';
+import type { Product, Project, Lead, ProfileColor, GlassType, HardwareOption, MonthlyData, LeadSourceData, Review } from './types';
 
 export const PRODUCTS: Product[] = [
   {
@@ -198,3 +198,73 @@ export const LEAD_SOURCES: LeadSourceData[] = [
 export const GST_RATE = 0.18;
 export const INSTALLATION_RATE = 0.075; // 7.5% of material cost
 export const MESH_COST_PER_UNIT = 800;
+
+export const INITIAL_REVIEWS: Review[] = [
+  {
+    id: 'REV-101',
+    name: 'K. Balasubramanian',
+    location: 'Adambakkam, Chennai',
+    rating: 5,
+    product: '3-Track Sliding Windows with SS Mesh',
+    comment: 'Installed Outlook UPVC sliding windows for our entire 3BHK flat in Adambakkam. The traffic sound reduction is unbelievable! Managing partner Durai personally supervised the measurement and installation. Extremely neat work and 100% on-time delivery.',
+    date: '10 Aug 2026',
+    verified: true,
+    avatarBg: '#3E7BFA',
+  },
+  {
+    id: 'REV-102',
+    name: 'Dr. Radhika Sundaram',
+    location: 'ECR Beach Villa, Chennai',
+    rating: 5,
+    product: 'German Lift & Slide Patio Doors',
+    comment: 'We needed massive 12-foot glass patio doors facing the coast with high wind resistance and corrosion protection. Saravanavel and his engineering team delivered top-tier German profiles. The sliding is feather-light and completely water-tight during heavy rains.',
+    date: '04 Aug 2026',
+    verified: true,
+    avatarBg: '#10b981',
+  },
+  {
+    id: 'REV-103',
+    name: 'M. Senthil Kumar (Architect)',
+    location: 'Anna Nagar, Chennai',
+    rating: 5,
+    product: 'Dark Walnut Arch Top Windows',
+    comment: 'As an architect, precision in custom arch templates is paramount. Outlook Enterprises executed our dark walnut woodgrain arched casement windows with flawless fusion welding and premium multi-point hardware. Outstanding craftsmanship.',
+    date: '28 Jul 2026',
+    verified: true,
+    avatarBg: '#8b5cf6',
+  },
+  {
+    id: 'REV-104',
+    name: 'Preethi & Karthik',
+    location: 'Velachery, Chennai',
+    rating: 5,
+    product: 'European Tilt & Turn Windows',
+    comment: 'Replaced our old wooden windows with Outlook UPVC Tilt & Turn windows. The ventilation in tilt mode is great for monsoon, and when locked the room is completely soundproof from the main road. Pricing was very transparent.',
+    date: '19 Jul 2026',
+    verified: true,
+    avatarBg: '#f59e0b',
+  },
+  {
+    id: 'REV-105',
+    name: 'G. Ramakrishnan',
+    location: 'Thoraipakkam (OMR), Chennai',
+    rating: 5,
+    product: 'Entire House UPVC Package',
+    comment: 'Honest estimation, zero hidden charges, and flawless installation within 16 days. The team cleaned up the site thoroughly after work. Highly recommend Saravanavel & Durai for any residential project in Chennai.',
+    date: '11 Jul 2026',
+    verified: true,
+    avatarBg: '#06b6d4',
+  },
+  {
+    id: 'REV-106',
+    name: 'Anand Varma (Facility Head)',
+    location: 'Guindy Industrial Estate, Chennai',
+    rating: 4,
+    product: 'Commercial Acoustic Partitions',
+    comment: 'Fitted 6,500 sq ft of modular acoustic glass partitions in our corporate office. High structural strength, excellent finish, and completed over a single weekend with minimal disruption.',
+    date: '02 Jul 2026',
+    verified: true,
+    avatarBg: '#ec4899',
+  },
+];
+

@@ -9,6 +9,7 @@ const FOOTER_LINKS = [
   { href: '/calculator', label: 'Instant Cost Estimator' },
   { href: '/why-upvc', label: 'Why UPVC?' },
   { href: '/projects', label: 'Portfolio Gallery' },
+  { href: '/#reviews', label: 'Customer Reviews & Ratings' },
 ];
 
 export default function Footer() {

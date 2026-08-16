@@ -14,6 +14,7 @@ const NAV_LINKS = [
   { href: '/visualizer', label: 'Visualizer' },
   { href: '/calculator', label: 'Price Calculator' },
   { href: '/projects', label: 'Projects' },
+  { href: '/#reviews', label: 'Reviews' },
 ];
 
 export default function Navbar() {
