@@ -2,6 +2,7 @@
 import { MapPin, Phone, Mail, User, Globe } from 'lucide-react';
 import Link from 'next/link';
 import CompanyLogo from '@/components/ui/CompanyLogo';
+import UPIPaymentSlip from '@/components/ui/UPIPaymentSlip';
 
 const FOOTER_LINKS = [
   { href: '/products', label: 'Product Catalog' },
@@ -17,10 +18,31 @@ export default function Footer() {
     <footer style={{
       background: 'var(--color-charcoal-deep)',
       borderTop: '1px solid var(--color-border)',
-      padding: '4rem 1.5rem 2rem',
+      padding: '0 0 2rem',
       marginTop: '6rem',
     }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+      {/* UPI Payment Section */}
+      <div style={{
+        borderBottom: '1px solid var(--color-border)',
+        paddingBottom: '1rem',
+      }}>
+        <p style={{
+          textAlign: 'center',
+          fontSize: '0.82rem',
+          color: 'var(--color-text-muted)',
+          letterSpacing: '0.08em',
+          textTransform: 'uppercase',
+          fontWeight: 600,
+          paddingTop: '2.5rem',
+          marginBottom: '0',
+        }}>
+          Scan to Pay via UPI
+        </p>
+        <UPIPaymentSlip />
+      </div>
+
+      {/* Original footer content */}
+      <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '3rem 1.5rem 0' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '2.5rem', marginBottom: '3rem' }}>
           {/* Brand */}
           <div style={{ marginBottom: '0.5rem' }}>
@@ -56,7 +78,7 @@ export default function Footer() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
               {[
                 { icon: <User size={14} />, text: 'Partners: Saravanavel & Durai' },
-                { icon: <MapPin size={14} />, text: 'No.7, 3rd Street, Sasthri Nagar, Adambakkam, Chennai – 600 088' },
+                { icon: <MapPin size={14} />, text: 'No.7, 3rd Street, Sasthri Nagar, Adambakkam, Chennai – 600 088', href: 'https://www.google.com/maps/search/?api=1&query=No.7,+3rd+Street,+Sasthri+Nagar,+Adambakkam,+Chennai+600088' },
                 { icon: <Globe size={14} />, text: 'www.outlookenterprises.in', href: 'https://www.outlookenterprises.in' },
                 { icon: <Mail size={14} />, text: 'outlookenterprises2@gmail.com', href: 'mailto:outlookenterprises2@gmail.com' },
                 { icon: <Phone size={14} />, text: '+91 80727 07041 / +91 70101 98326', href: 'tel:+918072707041' },
@@ -76,7 +98,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
+        <div className="footer-bottom" style={{ borderTop: '1px solid var(--color-border)', paddingTop: '1.75rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
           <p style={{ color: 'var(--color-text-muted)', fontSize: '0.82rem' }}>
             © 2026 Outlook Enterprises. All Rights Reserved. Manufactured with 100% lead-free German profiles.
           </p>

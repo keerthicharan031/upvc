@@ -129,7 +129,7 @@ function VisualizerContent() {
       </section>
 
       <section style={{ padding: '2rem 1.5rem 5rem' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '2.5rem', alignItems: 'start' }}>
+        <div className="calc-grid" style={{ maxWidth: '1200px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: '2.5rem', alignItems: 'start' }}>
 
           {/* Left — Live SVG Preview */}
           <motion.div variants={fadeInUp} initial="hidden" animate="visible" className="glass-card" style={{ padding: '2rem', position: 'sticky', top: '88px' }}>
@@ -273,12 +273,6 @@ function VisualizerContent() {
         </div>
       </section>
 
-      <style>{`
-        @media (max-width: 900px) {
-          section > div { grid-template-columns: 1fr !important; }
-          section > div > div:first-child { position: static !important; }
-        }
-      `}</style>
     </div>
   );
 }

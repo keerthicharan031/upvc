@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Zap, Moon, Sun } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import CompanyLogo from '@/components/ui/CompanyLogo';
 import BumpList from '@/components/ui/BumpList';
 
@@ -21,17 +22,18 @@ export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [dark, setDark] = useState(true);
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-  }, [dark]);
+  const currentTheme = mounted ? (resolvedTheme || theme) : 'dark';
+  const isDark = currentTheme === 'dark';
 
   return (
     <>
@@ -50,9 +52,10 @@ export default function Navbar() {
           display: 'flex',
           alignItems: 'center',
           transition: 'background 0.3s ease, backdrop-filter 0.3s ease, border-color 0.3s ease',
-          background: scrolled ? 'rgba(19, 21, 26, 0.9)' : 'transparent',
+          background: scrolled ? 'var(--nav-bg)' : 'transparent',
           backdropFilter: scrolled ? 'blur(20px)' : 'none',
-          borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : '1px solid transparent',
+          WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+          borderBottom: scrolled ? '1px solid var(--color-border)' : '1px solid transparent',
         }}
       >
         <div style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -76,8 +79,8 @@ export default function Navbar() {
                       fontSize: '0.875rem',
                       fontWeight: 500,
                       textDecoration: 'none',
-                      color: isActive ? '#fff' : 'var(--color-text-secondary)',
-                      background: isActive ? 'rgba(62,123,250,0.15)' : 'transparent',
+                      color: isActive ? 'var(--color-accent)' : 'var(--color-text-secondary)',
+                      background: isActive ? 'rgba(62,123,250,0.12)' : 'transparent',
                       border: isActive ? '1px solid rgba(62,123,250,0.3)' : '1px solid transparent',
                       display: 'inline-block',
                       transition: 'color 0.2s ease, background 0.2s ease',
@@ -93,20 +96,38 @@ export default function Navbar() {
           {/* Actions */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
             <button
-              onClick={() => setDark(!dark)}
-              style={{ background: 'rgba(255,255,255,0.07)', border: '1px solid var(--color-border)', borderRadius: '0.5rem', width: 36, height: 36, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', color: 'var(--color-text-secondary)' }}
-              title="Toggle theme"
+              onClick={() => setTheme(isDark ? 'light' : 'dark')}
+              aria-label={isDark ? 'Switch to Light theme' : 'Switch to Dark theme'}
+              title={isDark ? 'Switch to Light theme' : 'Switch to Dark theme'}
+              style={{
+                background: 'var(--color-surface-2)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '0.5rem',
+                width: 36,
+                height: 36,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: 'var(--color-text-primary)',
+                transition: 'all 0.2s ease',
+              }}
             >
-              {dark ? <Sun size={15} /> : <Moon size={15} />}
+              {mounted ? (
+                isDark ? <Sun size={16} /> : <Moon size={16} />
+              ) : (
+                <Sun size={16} />
+              )}
             </button>
 
-            <Link href="/calculator" className="btn-primary" style={{ fontSize: '0.82rem', padding: '0.55rem 1.1rem' }}>
-              <Zap size={13} /> Instant Quote
+            <Link href="/calculator" className="btn-primary nav-instant-quote" style={{ fontSize: '0.82rem', padding: '0.55rem 1.1rem' }}>
+              <Zap size={13} /> <span className="nav-quote-label">Instant Quote</span>
             </Link>
 
             <button
               style={{ background: 'none', border: 'none', color: 'var(--color-text-primary)', cursor: 'pointer', display: 'none' }}
               className="mobile-menu-btn"
+              aria-label="Toggle navigation menu"
               onClick={() => setMobileOpen(!mobileOpen)}
             >
               {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -129,8 +150,9 @@ export default function Navbar() {
               left: 0,
               right: 0,
               zIndex: 999,
-              background: 'rgba(19, 21, 26, 0.97)',
+              background: 'var(--nav-mobile-bg)',
               backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
               borderBottom: '1px solid var(--color-border)',
               padding: '1rem 1.5rem 1.5rem',
               display: 'flex',
@@ -149,8 +171,8 @@ export default function Navbar() {
                   fontSize: '0.95rem',
                   fontWeight: 500,
                   textDecoration: 'none',
-                  color: pathname === link.href ? '#fff' : 'var(--color-text-secondary)',
-                  background: pathname === link.href ? 'rgba(62,123,250,0.15)' : 'transparent',
+                  color: pathname === link.href ? 'var(--color-accent)' : 'var(--color-text-secondary)',
+                  background: pathname === link.href ? 'rgba(62,123,250,0.12)' : 'transparent',
                   display: 'block',
                   transition: 'all 0.2s ease',
                 }}

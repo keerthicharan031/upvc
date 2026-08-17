@@ -2,7 +2,6 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Link from 'next/link';
-import { staggerContainer, staggerItem } from '@/lib/animations';
 import { Volume2, Leaf, Lock, Wind, CheckCircle, ChevronRight } from 'lucide-react';
 
 const FEATURES = [
@@ -45,15 +44,69 @@ const FEATURES = [
 ];
 
 const COMPARISON = [
-  { feature: 'Sound Insulation', upvc: '42 dB', aluminium: '28 dB', wood: '30 dB', winner: 'upvc' },
-  { feature: 'Thermal Insulation', upvc: 'Excellent', aluminium: 'Poor', wood: 'Good', winner: 'upvc' },
-  { feature: 'Maintenance Required', upvc: 'Zero', aluminium: 'Low', wood: 'High (annual)', winner: 'upvc' },
-  { feature: 'Termite / Pest Risk', upvc: 'None', aluminium: 'None', wood: 'High', winner: 'upvc' },
-  { feature: 'Rust / Corrosion', upvc: 'Zero', aluminium: 'Moderate', wood: 'None', winner: 'upvc' },
-  { feature: 'Lifespan', upvc: '25–30 yrs', aluminium: '15–20 yrs', wood: '10–15 yrs', winner: 'upvc' },
-  { feature: 'Energy Cost Impact', upvc: '-40%', aluminium: '+20%', wood: '-10%', winner: 'upvc' },
-  { feature: 'Security Rating', upvc: 'RC2 Class', aluminium: 'Standard', wood: 'Basic', winner: 'upvc' },
+  { feature: 'Sound Insulation', upvc: '42 dB', aluminium: '28 dB', wood: '30 dB' },
+  { feature: 'Thermal Insulation', upvc: 'Excellent', aluminium: 'Poor', wood: 'Good' },
+  { feature: 'Maintenance Required', upvc: 'Zero', aluminium: 'Low', wood: 'High (annual)' },
+  { feature: 'Termite / Pest Risk', upvc: 'None', aluminium: 'None', wood: 'High' },
+  { feature: 'Rust / Corrosion', upvc: 'Zero', aluminium: 'Moderate', wood: 'None' },
+  { feature: 'Lifespan', upvc: '25–30 yrs', aluminium: '15–20 yrs', wood: '10–15 yrs' },
+  { feature: 'Energy Cost Impact', upvc: '-40%', aluminium: '+20%', wood: '-10%' },
+  { feature: 'Security Rating', upvc: 'RC2 Class', aluminium: 'Standard', wood: 'Basic' },
 ];
+
+type Feature = typeof FEATURES[number];
+
+// Extracted into its own component so hooks are called at the top level — Rules of Hooks compliance
+function FeatureItem({ feature, index }: { feature: Feature; index: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: '-80px' });
+  const isEven = index % 2 === 0;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6 }}
+      className="feature-deep-grid"
+      style={{
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr',
+        gap: '3rem',
+        alignItems: 'center',
+      }}
+    >
+      {/* Content */}
+      <div style={{ order: isEven ? 0 : 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
+          <div className="feature-icon-wrap" style={{ color: 'var(--color-accent)' }}>{feature.icon}</div>
+          <span className={`badge ${feature.badge}`}>{feature.stat}</span>
+        </div>
+        <h2 style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 800, marginBottom: '1rem' }}>{feature.title}</h2>
+        <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem' }}>{feature.desc}</p>
+        <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1.5rem' }}>
+          {feature.points.map((p) => (
+            <li key={p} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
+              <CheckCircle size={14} style={{ color: 'var(--color-accent)', marginTop: 2, flexShrink: 0 }} />
+              {p}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Metric card */}
+      <div style={{ order: isEven ? 1 : 0 }}>
+        <div className="glass-card" style={{ padding: '2.5rem', textAlign: 'center' }}>
+          <div style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 900, lineHeight: 1 }} className="text-gradient">{feature.stat}</div>
+          <p style={{ color: 'var(--color-text-secondary)', marginTop: '1rem', fontSize: '0.95rem' }}>{feature.metric.label}</p>
+          <div style={{ marginTop: '1.5rem', background: 'rgba(62,123,250,0.08)', border: '1px solid rgba(62,123,250,0.15)', borderRadius: '0.625rem', padding: '0.75rem 1.5rem' }}>
+            <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-accent)' }}>{feature.metric.value}</span>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function WhyUPVCPage() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -81,61 +134,14 @@ export default function WhyUPVCPage() {
       {/* Feature Deep Dives */}
       <section style={{ padding: '2rem 1.5rem 5rem' }}>
         <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '4rem' }}>
-          {FEATURES.map((feature, i) => {
-            const ref = useRef<HTMLDivElement>(null);
-            const isInView = useInView(ref, { once: true, margin: '-80px' });
-            const isEven = i % 2 === 0;
-
-            return (
-              <motion.div
-                key={feature.title}
-                ref={ref}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.6 }}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr 1fr',
-                  gap: '3rem',
-                  alignItems: 'center',
-                }}
-              >
-                {/* Content */}
-                <div style={{ order: isEven ? 0 : 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.25rem' }}>
-                    <div className="feature-icon-wrap" style={{ color: 'var(--color-accent)' }}>{feature.icon}</div>
-                    <span className={`badge ${feature.badge}`}>{feature.stat}</span>
-                  </div>
-                  <h2 style={{ fontSize: 'clamp(1.5rem, 2.5vw, 2rem)', fontWeight: 800, marginBottom: '1rem' }}>{feature.title}</h2>
-                  <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.7, marginBottom: '1.5rem' }}>{feature.desc}</p>
-                  <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.6rem', marginBottom: '1.5rem' }}>
-                    {feature.points.map((p) => (
-                      <li key={p} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.6rem', fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>
-                        <CheckCircle size={14} style={{ color: 'var(--color-accent)', marginTop: 2, flexShrink: 0 }} />
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Metric card */}
-                <div style={{ order: isEven ? 1 : 0 }}>
-                  <div className="glass-card" style={{ padding: '2.5rem', textAlign: 'center' }}>
-                    <div style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', fontWeight: 900, lineHeight: 1 }} className="text-gradient">{feature.stat}</div>
-                    <p style={{ color: 'var(--color-text-secondary)', marginTop: '1rem', fontSize: '0.95rem' }}>{feature.metric.label}</p>
-                    <div style={{ marginTop: '1.5rem', background: 'rgba(62,123,250,0.08)', border: '1px solid rgba(62,123,250,0.15)', borderRadius: '0.625rem', padding: '0.75rem 1.5rem' }}>
-                      <span style={{ fontSize: '1.1rem', fontWeight: 700, color: 'var(--color-accent)' }}>{feature.metric.value}</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+          {FEATURES.map((feature, i) => (
+            <FeatureItem key={feature.title} feature={feature} index={i} />
+          ))}
         </div>
       </section>
 
       {/* Comparison Table */}
-      <section style={{ padding: '5rem 1.5rem', background: 'rgba(0,0,0,0.2)' }}>
+      <section style={{ padding: '5rem 1.5rem', background: 'var(--section-alt-bg)' }}>
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <div className="section-header">
             <span className="badge badge-blue">Material Comparison</span>
@@ -143,8 +149,8 @@ export default function WhyUPVCPage() {
             <p className="section-desc">An objective look at how UPVC compares across every performance dimension.</p>
           </div>
 
-          <div className="glass-card" style={{ overflow: 'hidden' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <div className="comparison-table-wrap glass-card" style={{ overflow: 'auto' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse', minWidth: '480px' }}>
               <thead>
                 <tr style={{ background: 'rgba(62,123,250,0.08)', borderBottom: '1px solid var(--color-border)' }}>
                   <th style={{ padding: '1rem 1.5rem', textAlign: 'left', fontSize: '0.85rem', color: 'var(--color-text-muted)', fontWeight: 600 }}>Feature</th>
@@ -155,7 +161,7 @@ export default function WhyUPVCPage() {
               </thead>
               <tbody>
                 {COMPARISON.map((row, i) => (
-                  <tr key={row.feature} style={{ borderBottom: '1px solid var(--color-border)', background: i % 2 === 0 ? 'transparent' : 'rgba(255,255,255,0.015)' }}>
+                  <tr key={row.feature} style={{ borderBottom: '1px solid var(--color-border)', background: i % 2 === 0 ? 'transparent' : 'var(--table-alt-row)' }}>
                     <td style={{ padding: '0.9rem 1.5rem', fontSize: '0.875rem', color: 'var(--color-text-secondary)', fontWeight: 500 }}>{row.feature}</td>
                     <td style={{ padding: '0.9rem 1.5rem', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-accent)', fontWeight: 700 }}>{row.upvc}</td>
                     <td style={{ padding: '0.9rem 1.5rem', textAlign: 'center', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>{row.aluminium}</td>
@@ -174,14 +180,6 @@ export default function WhyUPVCPage() {
         </div>
       </section>
 
-      {/* Mobile */}
-      <style>{`
-        @media (max-width: 768px) {
-          .feature-grid { grid-template-columns: 1fr !important; }
-          section > div > div { grid-template-columns: 1fr !important; }
-          section > div > div > div { order: 0 !important; }
-        }
-      `}</style>
     </div>
   );
 }

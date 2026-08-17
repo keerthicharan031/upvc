@@ -45,7 +45,7 @@ export default function ProductsPage() {
       {/* Filter Tabs */}
       <section style={{ padding: '0 1.5rem 4rem' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
-          <div ref={ref} style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '3rem', justifyContent: 'center' }}>
+          <div ref={ref} className="filter-bar" style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginBottom: '3rem', justifyContent: 'center' }}>
             {FILTERS.map((filter) => {
               const isActive = activeFilter === filter.key;
               return (

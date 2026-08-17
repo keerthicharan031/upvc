@@ -157,14 +157,14 @@ function CalculatorContent() {
       </section>
 
       <section style={{ padding: '2rem 1.5rem 5rem' }}>
-        <div style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '2.5rem', alignItems: 'start' }}>
+        <div className="calc-grid" style={{ maxWidth: '1100px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: '2.5rem', alignItems: 'start' }}>
 
           {/* Left — Form */}
           <motion.div variants={fadeInUp} initial="hidden" animate="visible" className="glass-card" style={{ padding: '2.5rem' }}>
             <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '2rem' }}>Configure Your Quote</h3>
             <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               {/* Dimensions */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
+              <div className="calc-dim-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
                 {[
                   { label: 'Width (ft)', name: 'width', min: 1, max: 25, step: 0.5 },
                   { label: 'Height (ft)', name: 'height', min: 1, max: 15, step: 0.5 },
@@ -252,16 +252,6 @@ function CalculatorContent() {
         </div>
       </section>
 
-      <style>{`
-        @media (max-width: 900px) {
-          section > div { grid-template-columns: 1fr !important; }
-          section > div > div:last-child { position: static !important; }
-        }
-        @media (max-width: 600px) {
-          .glass-card form > div:first-child { grid-template-columns: 1fr !important; }
-          .glass-card form > div:nth-child(4) { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </div>
   );
 }

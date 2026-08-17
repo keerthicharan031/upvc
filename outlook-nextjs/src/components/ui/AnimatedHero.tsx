@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Zap, Sparkles, ShieldCheck, Volume2, SunMedium } from 'lucide-react';
 
+import { useTheme } from 'next-themes';
+
 const TOTAL_FRAMES = 49;
 
 export default function AnimatedHero() {
@@ -13,6 +15,14 @@ export default function AnimatedHero() {
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  const { theme, resolvedTheme } = useTheme();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const isDark = mounted ? (resolvedTheme || theme) === 'dark' : true;
 
   // Animation & Lerp references
   const currentFrameRef = useRef<number>(0);
@@ -169,7 +179,7 @@ export default function AnimatedHero() {
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
-        background: '#0a0a1a',
+        background: 'var(--color-bg)',
       }}
     >
       {/* 1. Canvas Interactive Background */}
@@ -206,7 +216,7 @@ export default function AnimatedHero() {
         }}
       />
 
-      {/* 3. High-Contrast Gradient Dark Overlay for Legibility (WCAG AA) */}
+      {/* 3. High-Contrast Gradient Dark/Light Overlay for Legibility (WCAG AA) */}
       <div
         aria-hidden="true"
         style={{
@@ -217,23 +227,31 @@ export default function AnimatedHero() {
           bottom: 0,
           zIndex: 2,
           pointerEvents: 'none',
-          background: `
-            linear-gradient(to right, rgba(10, 10, 26, 0.88) 0%, rgba(10, 10, 26, 0.65) 45%, rgba(10, 10, 26, 0.35) 100%),
-            linear-gradient(to top, rgba(10, 10, 26, 0.95) 0%, transparent 60%)
-          `,
+          background: isDark
+            ? `
+              linear-gradient(to right, rgba(10, 10, 26, 0.88) 0%, rgba(10, 10, 26, 0.65) 45%, rgba(10, 10, 26, 0.35) 100%),
+              linear-gradient(to top, rgba(10, 10, 26, 0.95) 0%, transparent 60%)
+            `
+            : `
+              linear-gradient(to right, rgba(248, 250, 252, 0.72) 0%, rgba(248, 250, 252, 0.45) 35%, rgba(248, 250, 252, 0.08) 60%, transparent 100%),
+              linear-gradient(to top, rgba(248, 250, 252, 0.65) 0%, rgba(248, 250, 252, 0.15) 30%, transparent 55%)
+            `,
+          transition: 'background 0.3s ease',
         }}
       />
 
       {/* 4. Interactive Scrubbing Hint Badge */}
       <div
+        className="hero-hint-badge"
         style={{
           position: 'absolute',
           top: '90px',
           right: '2rem',
           zIndex: 4,
-          background: 'rgba(19, 21, 26, 0.75)',
+          background: 'var(--glass-bg)',
           backdropFilter: 'blur(12px)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
+          WebkitBackdropFilter: 'blur(12px)',
+          border: '1px solid var(--glass-border)',
           borderRadius: '2rem',
           padding: '0.4rem 0.9rem',
           fontSize: '0.78rem',
@@ -244,13 +262,14 @@ export default function AnimatedHero() {
           pointerEvents: 'none',
         }}
       >
-        <Sparkles size={14} style={{ color: '#00d4ff' }} />
+        <Sparkles size={14} style={{ color: 'var(--color-accent)' }} />
         <span>Hover mouse across screen to interactively zoom 3D viewport</span>
         {!isLoaded && <span style={{ opacity: 0.6 }}>({loadProgress}%)</span>}
       </div>
 
       {/* 5. Clean, Professional Hero Content Block */}
       <div
+        className="hero-content-block"
         style={{
           position: 'relative',
           zIndex: 3,
@@ -274,7 +293,7 @@ export default function AnimatedHero() {
               borderRadius: '2rem',
               background: 'rgba(62, 123, 250, 0.12)',
               border: '1px solid rgba(62, 123, 250, 0.3)',
-              color: '#3E7BFA',
+              color: 'var(--color-accent)',
               fontSize: '0.82rem',
               fontWeight: 600,
               marginBottom: '1.25rem',
@@ -294,7 +313,7 @@ export default function AnimatedHero() {
               fontWeight: 800,
               lineHeight: 1.12,
               letterSpacing: '-0.03em',
-              color: '#ffffff',
+              color: 'var(--color-text-primary)',
               marginBottom: '1.25rem',
             }}
           >
@@ -343,6 +362,7 @@ export default function AnimatedHero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
+            className="hero-trust-row"
             style={{
               display: 'flex',
               alignItems: 'center',

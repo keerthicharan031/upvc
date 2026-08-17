@@ -149,7 +149,7 @@ function EnquiryContent() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: 'spring', stiffness: 200, damping: 20 }}
-          className="glass-card"
+          className="glass-card enquiry-success-card"
           style={{ maxWidth: 680, width: '100%', padding: '3rem 2.5rem', textAlign: 'center' }}
         >
           <motion.div
@@ -161,16 +161,16 @@ function EnquiryContent() {
             <CheckCircle size={38} />
           </motion.div>
           
-          <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: 'white', marginBottom: '0.75rem' }}>
+          <h2 style={{ fontSize: '1.85rem', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '0.75rem' }}>
             Enquiry Registered Successfully!
           </h2>
           <p style={{ color: 'var(--color-text-secondary)', lineHeight: 1.6, marginBottom: '1.75rem', fontSize: '0.95rem' }}>
-            Thank you, <strong style={{ color: 'white' }}>{submittedLead.name}</strong>! Your requirement is securely registered in our system under Reference ID <strong style={{ color: 'var(--color-accent)' }}>{submittedLead.id}</strong>. Managing partners <strong style={{ color: 'white' }}>Saravanavel &amp; Durai</strong> will connect with you within <strong style={{ color: '#34d399' }}>24 hours</strong>.
+            Thank you, <strong style={{ color: 'var(--color-text-primary)' }}>{submittedLead.name}</strong>! Your requirement is securely registered in our system under Reference ID <strong style={{ color: 'var(--color-accent)' }}>{submittedLead.id}</strong>. Managing partners <strong style={{ color: 'var(--color-text-primary)' }}>Saravanavel &amp; Durai</strong> will connect with you within <strong style={{ color: '#34d399' }}>24 hours</strong>.
           </p>
 
           {/* Submitted Lead Summary Card */}
-          <div style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid var(--color-border)', borderRadius: '1rem', padding: '1.5rem', marginBottom: '2rem', textAlign: 'left' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid rgba(255,255,255,0.08)', paddingBottom: '0.75rem' }}>
+          <div style={{ background: 'var(--input-bg)', border: '1px solid var(--color-border)', borderRadius: '1rem', padding: '1.5rem', marginBottom: '2rem', textAlign: 'left' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', borderBottom: '1px solid var(--color-border)', paddingBottom: '0.75rem' }}>
               <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--color-accent)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
                 Enquiry Details
               </span>
@@ -195,11 +195,11 @@ function EnquiryContent() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '0.85rem', fontSize: '0.88rem' }}>
               <div>
                 <span style={{ color: 'var(--color-text-muted)', display: 'block', fontSize: '0.75rem' }}>Customer Name</span>
-                <strong style={{ color: 'white' }}>{submittedLead.name}</strong>
+                <strong style={{ color: 'var(--color-text-primary)' }}>{submittedLead.name}</strong>
               </div>
               <div>
                 <span style={{ color: 'var(--color-text-muted)', display: 'block', fontSize: '0.75rem' }}>Mobile Number</span>
-                <strong style={{ color: 'white' }}>{submittedLead.phone}</strong>
+                <strong style={{ color: 'var(--color-text-primary)' }}>{submittedLead.phone}</strong>
               </div>
               <div>
                 <span style={{ color: 'var(--color-text-muted)', display: 'block', fontSize: '0.75rem' }}>Product</span>
@@ -280,12 +280,12 @@ function EnquiryContent() {
       </section>
 
       <section style={{ padding: '2rem 1.5rem 5rem' }}>
-        <div style={{ maxWidth: '960px', margin: '0 auto', display: 'grid', gridTemplateColumns: vizConfig || calcConfig ? '1fr 1fr' : '1fr', gap: '2.5rem', alignItems: 'start' }}>
+        <div className="enquiry-grid" style={{ maxWidth: '960px', margin: '0 auto', display: 'grid', gridTemplateColumns: vizConfig || calcConfig ? '1fr 1fr' : '1fr', gap: '2.5rem', alignItems: 'start' }}>
 
           {/* Form */}
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="glass-card" style={{ padding: '2.5rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'white', margin: 0 }}>
+              <h3 style={{ fontSize: '1.25rem', fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
                 Enquiry Details
               </h3>
               <span style={{ fontSize: '0.78rem', color: 'var(--color-accent)', fontWeight: 600 }}>
@@ -416,7 +416,7 @@ function EnquiryContent() {
             )}
 
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="glass-card" style={{ padding: '1.75rem' }}>
-              <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'white', marginBottom: '1rem' }}>
+              <h4 style={{ fontSize: '0.95rem', fontWeight: 700, color: 'var(--color-text-primary)', marginBottom: '1rem' }}>
                 What happens after you submit?
               </h4>
               {[
@@ -430,13 +430,13 @@ function EnquiryContent() {
                     {i + 1}
                   </span>
                   <div>
-                    <strong style={{ color: 'white', display: 'block', fontSize: '0.85rem' }}>{step.title}</strong>
+                    <strong style={{ color: 'var(--color-text-primary)', display: 'block', fontSize: '0.85rem' }}>{step.title}</strong>
                     <span style={{ color: 'var(--color-text-secondary)', fontSize: '0.8rem' }}>{step.desc}</span>
                   </div>
                 </div>
               ))}
 
-              <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
+              <div style={{ marginTop: '1.25rem', paddingTop: '1.25rem', borderTop: '1px solid var(--color-border)', fontSize: '0.8rem', color: 'var(--color-text-muted)' }}>
                 <p style={{ marginBottom: '0.3rem' }}>
                   📞 <strong>Direct Contact:</strong> <a href="tel:+918072707041" style={{ color: 'var(--color-accent)' }}>+91 80727 07041</a> / <a href="tel:+917010198326" style={{ color: 'var(--color-accent)' }}>+91 70101 98326</a>
                 </p>
@@ -449,11 +449,6 @@ function EnquiryContent() {
         </div>
       </section>
 
-      <style>{`
-        @media (max-width: 768px) {
-          section > div { grid-template-columns: 1fr !important; }
-        }
-      `}</style>
     </div>
   );
 }

@@ -140,7 +140,7 @@ export default function CustomCursor() {
             ? '0 0 20px rgba(62, 123, 250, 0.35), inset 0 0 10px rgba(96, 165, 250, 0.2)'
             : 'none',
           transformOrigin: 'center center',
-          scale: isMouseDown ? '0.85' : '1',
+          transform: isMouseDown ? 'scale(0.85)' : 'scale(1)',
           pointerEvents: 'none',
           willChange: 'transform',
           transition: 'width 250ms ease, height 250ms ease, border-color 250ms ease, background-color 250ms ease, box-shadow 250ms ease, scale 150ms ease',

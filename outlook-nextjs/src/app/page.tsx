@@ -120,10 +120,10 @@ function HeroSection() {
             <motion.div
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              style={{ position: 'absolute', bottom: 24, left: -24, background: 'rgba(19,21,26,0.9)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.12)', borderRadius: '0.875rem', padding: '1rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1rem' }}
+              style={{ position: 'absolute', bottom: 24, left: -24, background: 'var(--glass-bg)', backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)', border: '1px solid var(--glass-border)', borderRadius: '0.875rem', padding: '1rem 1.5rem', display: 'flex', alignItems: 'center', gap: '1rem', boxShadow: '0 8px 30px rgba(0,0,0,0.1)' }}
             >
               <div>
-                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.2rem' }}>Lift & Slide Series</h4>
+                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.2rem', color: 'var(--color-text-primary)' }}>Lift & Slide Series</h4>
                 <p style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)' }}>Double Glazed Acoustic Glass (24mm)</p>
               </div>
               <span className="badge badge-green" style={{ whiteSpace: 'nowrap' }}>Class 9A Seal</span>
@@ -147,13 +147,6 @@ function HeroSection() {
         </div>
       </motion.div>
 
-      {/* Mobile responsive */}
-      <style>{`
-        @media (max-width: 768px) {
-          section > div { grid-template-columns: 1fr !important; }
-          section > div > div:last-child { display: none; }
-        }
-      `}</style>
     </section>
   );
 }
@@ -200,9 +193,6 @@ function WhyUPVCSection() {
               onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'rgba(62,123,250,0.3)')}
               onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--glass-border)')}
             >
-              {/* Background number */}
-              <div style={{ position: 'absolute', top: '-0.5rem', right: '1rem', fontSize: '5rem', fontWeight: 900, color: 'rgba(62,123,250,0.04)', lineHeight: 1 }}>0{i + 1}</div>
-
               <div className="feature-icon-wrap" style={{ color: 'var(--color-accent)' }}>{f.icon}</div>
               <div style={{ display: 'inline-block', background: 'rgba(62,123,250,0.1)', border: '1px solid rgba(62,123,250,0.2)', borderRadius: '0.4rem', padding: '0.2rem 0.6rem', fontSize: '0.8rem', fontWeight: 700, color: 'var(--color-accent)', marginBottom: '0.75rem' }}>{f.stat}</div>
               <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '0.75rem' }}>{f.title}</h3>
@@ -231,7 +221,7 @@ function ProductsPreviewSection() {
   const isInView = useInView(ref, { once: true, margin: '-80px' });
 
   return (
-    <section ref={ref} style={{ padding: '5rem 1.5rem', background: 'rgba(0,0,0,0.15)' }}>
+    <section ref={ref} style={{ padding: '5rem 1.5rem', background: 'var(--section-alt-bg)' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
         <motion.div
           className="section-header"
@@ -326,6 +316,7 @@ function ConsultationBand() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
+          className="consult-inner"
           style={{
             background: 'linear-gradient(135deg, rgba(62,123,250,0.12) 0%, rgba(62,123,250,0.05) 100%)',
             border: '1px solid rgba(62,123,250,0.25)',

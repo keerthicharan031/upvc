@@ -15,7 +15,7 @@ export default function Error({
       </p>
       <button
         onClick={() => reset()}
-        className="btn btn-primary"
+        className="btn-primary"
       >
         Try again
       </button>

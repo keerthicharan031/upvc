@@ -39,7 +39,7 @@ export default function ProjectsPage() {
       <section style={{ padding: '2rem 1.5rem 5rem' }}>
         <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
           {/* Filter */}
-          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', marginBottom: '3rem' }}>
+          <div className="filter-bar" style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', marginBottom: '3rem', flexWrap: 'wrap' }}>
             {FILTERS.map((filter) => {
               const isActive = activeFilter === filter;
               return (
@@ -67,11 +67,12 @@ export default function ProjectsPage() {
 
           <div ref={ref}>
             <motion.div
+              className="projects-grid"
               key={activeFilter}
               variants={staggerContainer}
               initial="hidden"
               animate={isInView ? 'visible' : 'hidden'}
-              style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: '1.75rem' }}
+              style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.75rem' }}
             >
               {filtered.map((project) => (
                 <ProjectCard key={project.title} project={project} />

@@ -131,7 +131,7 @@ export default function ReviewsSection() {
           >
             <Sparkles size={14} color="#f59e0b" /> Verified Customer Testimonials
           </span>
-          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'white', letterSpacing: '-0.02em', marginBottom: '0.75rem' }}>
+          <h2 style={{ fontSize: '2.5rem', fontWeight: 800, color: 'var(--color-text-primary)', letterSpacing: '-0.02em', marginBottom: '0.75rem' }}>
             Trusted by 500+ <span className="text-gradient">Chennai Homeowners</span> &amp; Architects
           </h2>
           <p style={{ color: 'var(--color-text-secondary)', maxWidth: '680px', margin: '0 auto', fontSize: '1.05rem', lineHeight: 1.6 }}>
@@ -153,13 +153,11 @@ export default function ReviewsSection() {
             gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
             gap: '2.5rem',
             alignItems: 'center',
-            background: 'linear-gradient(135deg, rgba(15, 39, 68, 0.65) 0%, rgba(6, 17, 31, 0.75) 100%)',
-            border: '1px solid rgba(255, 255, 255, 0.12)',
           }}
         >
           {/* Main Score Box */}
-          <div style={{ textAlign: 'center', borderRight: '1px solid rgba(255,255,255,0.08)', paddingRight: '1.5rem' }}>
-            <div style={{ fontSize: '4.2rem', fontWeight: 900, color: 'white', lineHeight: 1, marginBottom: '0.5rem' }}>
+          <div style={{ textAlign: 'center', borderRight: '1px solid var(--color-border)', paddingRight: '1.5rem' }}>
+            <div style={{ fontSize: '4.2rem', fontWeight: 900, color: 'var(--color-text-primary)', lineHeight: 1, marginBottom: '0.5rem' }}>
               {metrics.average}
             </div>
             <div style={{ display: 'flex', justifyContent: 'center', gap: '0.25rem', marginBottom: '0.75rem' }}>
@@ -173,7 +171,7 @@ export default function ReviewsSection() {
               ))}
             </div>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9rem', fontWeight: 600, margin: 0 }}>
-              Based on <strong style={{ color: 'white' }}>{metrics.total} verified reviews</strong>
+              Based on <strong style={{ color: 'var(--color-text-primary)' }}>{metrics.total} verified reviews</strong>
             </p>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', color: '#34d399', fontSize: '0.8rem', marginTop: '0.5rem', fontWeight: 600 }}>
               <ShieldCheck size={15} /> 100% Genuine Project Reviews
@@ -272,9 +270,9 @@ export default function ReviewsSection() {
                 border: '1px solid',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
-                background: selectedFilter === 'all' ? 'var(--color-accent)' : 'rgba(255,255,255,0.05)',
-                borderColor: selectedFilter === 'all' ? 'var(--color-accent)' : 'rgba(255,255,255,0.1)',
-                color: 'white',
+                background: selectedFilter === 'all' ? 'var(--color-accent)' : 'var(--btn-secondary-bg)',
+                borderColor: selectedFilter === 'all' ? 'var(--color-accent)' : 'var(--color-border)',
+                color: selectedFilter === 'all' ? '#ffffff' : 'var(--color-text-primary)',
               }}
             >
               All Reviews ({reviews.length})
@@ -289,9 +287,9 @@ export default function ReviewsSection() {
                 border: '1px solid',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
-                background: selectedFilter === 5 ? 'rgba(245,158,11,0.2)' : 'rgba(255,255,255,0.05)',
-                borderColor: selectedFilter === 5 ? '#f59e0b' : 'rgba(255,255,255,0.1)',
-                color: selectedFilter === 5 ? '#fbbf24' : 'white',
+                background: selectedFilter === 5 ? 'rgba(245,158,11,0.2)' : 'var(--btn-secondary-bg)',
+                borderColor: selectedFilter === 5 ? '#f59e0b' : 'var(--color-border)',
+                color: selectedFilter === 5 ? '#d97706' : 'var(--color-text-primary)',
               }}
             >
               ⭐ 5 Stars Only ({metrics.breakdown[5] || 0})
@@ -306,9 +304,9 @@ export default function ReviewsSection() {
                 border: '1px solid',
                 cursor: 'pointer',
                 transition: 'all 0.2s',
-                background: selectedFilter === 4 ? 'rgba(59,130,246,0.2)' : 'rgba(255,255,255,0.05)',
-                borderColor: selectedFilter === 4 ? '#3b82f6' : 'rgba(255,255,255,0.1)',
-                color: selectedFilter === 4 ? '#60a5fa' : 'white',
+                background: selectedFilter === 4 ? 'rgba(59,130,246,0.2)' : 'var(--btn-secondary-bg)',
+                borderColor: selectedFilter === 4 ? '#3b82f6' : 'var(--color-border)',
+                color: selectedFilter === 4 ? 'var(--color-accent)' : 'var(--color-text-primary)',
               }}
             >
               ⭐ 4 Stars ({metrics.breakdown[4] || 0})
@@ -346,7 +344,6 @@ export default function ReviewsSection() {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 position: 'relative',
-                border: '1px solid rgba(255,255,255,0.08)',
               }}
             >
               <div>
@@ -375,7 +372,7 @@ export default function ReviewsSection() {
 
                     <div>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-                        <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'white', margin: 0 }}>
+                        <h4 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--color-text-primary)', margin: 0 }}>
                           {rev.name}
                         </h4>
                         {rev.verified && (
@@ -385,7 +382,7 @@ export default function ReviewsSection() {
                         )}
                       </div>
                       <span style={{ fontSize: '0.78rem', color: 'var(--color-text-muted)', display: 'flex', alignItems: 'center', gap: '0.25rem', marginTop: '0.15rem' }}>
-                        <MapPin size={12} color="#60a5fa" /> {rev.location}
+                        <MapPin size={12} color="var(--color-accent)" /> {rev.location}
                       </span>
                     </div>
                   </div>
@@ -396,7 +393,7 @@ export default function ReviewsSection() {
                       <Star
                         key={s}
                         size={15}
-                        fill={s <= rev.rating ? '#fbbf24' : 'rgba(255,255,255,0.15)'}
+                        fill={s <= rev.rating ? '#fbbf24' : 'rgba(128,128,128,0.2)'}
                         color={s <= rev.rating ? '#f59e0b' : 'transparent'}
                       />
                     ))}
@@ -406,12 +403,12 @@ export default function ReviewsSection() {
                 {/* Product Tag */}
                 <div
                   style={{
-                    background: 'rgba(62,123,250,0.12)',
+                    background: 'var(--badge-blue-bg)',
                     border: '1px solid rgba(62,123,250,0.25)',
                     borderRadius: '6px',
                     padding: '0.3rem 0.65rem',
                     fontSize: '0.75rem',
-                    color: '#93c5fd',
+                    color: 'var(--badge-blue-text)',
                     fontWeight: 600,
                     marginBottom: '1rem',
                     display: 'inline-block',
@@ -421,7 +418,7 @@ export default function ReviewsSection() {
                 </div>
 
                 {/* Review Text */}
-                <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.92rem', lineHeight: 1.65, margin: 0 }}>
+                <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.92rem', lineHeight: 1.65, margin: 0 }}>
                   “{rev.comment}”
                 </p>
               </div>
@@ -431,7 +428,7 @@ export default function ReviewsSection() {
                 style={{
                   marginTop: '1.5rem',
                   paddingTop: '1rem',
-                  borderTop: '1px solid rgba(255,255,255,0.06)',
+                  borderTop: '1px solid var(--color-border)',
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
@@ -480,8 +477,9 @@ export default function ReviewsSection() {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              background: 'rgba(4, 11, 20, 0.85)',
+              background: 'var(--modal-overlay-bg)',
               backdropFilter: 'blur(10px)',
+              WebkitBackdropFilter: 'blur(10px)',
               padding: '1.5rem',
             }}
           >
@@ -489,14 +487,13 @@ export default function ReviewsSection() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="glass-card"
+              className="glass-card-strong"
               style={{
                 width: '100%',
                 maxWidth: '560px',
                 padding: '2.5rem',
                 position: 'relative',
-                boxShadow: '0 25px 60px rgba(0,0,0,0.8)',
-                border: '1px solid rgba(255,255,255,0.18)',
+                boxShadow: '0 25px 60px rgba(0,0,0,0.3)',
                 maxHeight: '90vh',
                 overflowY: 'auto',
               }}
@@ -508,9 +505,9 @@ export default function ReviewsSection() {
                   position: 'absolute',
                   top: '20px',
                   right: '20px',
-                  background: 'rgba(255,255,255,0.08)',
-                  border: 'none',
-                  color: 'white',
+                  background: 'var(--btn-secondary-bg)',
+                  border: '1px solid var(--color-border)',
+                  color: 'var(--color-text-primary)',
                   borderRadius: '50%',
                   width: '34px',
                   height: '34px',
@@ -543,7 +540,7 @@ export default function ReviewsSection() {
                   >
                     <CheckCircle2 size={36} />
                   </motion.div>
-                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'white', marginBottom: '0.5rem' }}>
+                  <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--color-text-primary)', marginBottom: '0.5rem' }}>
                     Thank You for Your Review!
                   </h3>
                   <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.95rem' }}>
@@ -556,7 +553,7 @@ export default function ReviewsSection() {
                     <span className="badge badge-blue" style={{ marginBottom: '0.5rem', display: 'inline-block' }}>
                       Share Your Experience
                     </span>
-                    <h3 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'white', margin: '0.3rem 0 0.4rem' }}>
+                    <h3 style={{ fontSize: '1.6rem', fontWeight: 800, color: 'var(--color-text-primary)', margin: '0.3rem 0 0.4rem' }}>
                       Write a Customer Review
                     </h3>
                     <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.88rem', margin: 0 }}>
