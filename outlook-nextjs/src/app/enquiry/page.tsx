@@ -440,8 +440,11 @@ function EnquiryContent() {
                 <p style={{ marginBottom: '0.3rem' }}>
                   📞 <strong>Direct Contact:</strong> <a href="tel:+918072707041" style={{ color: 'var(--color-accent)' }}>+91 80727 07041</a> / <a href="tel:+917010198326" style={{ color: 'var(--color-accent)' }}>+91 70101 98326</a>
                 </p>
+                <p style={{ marginBottom: '0.3rem' }}>
+                  📸 <strong>Instagram:</strong> <a href="https://www.instagram.com/outlookenterpriseschennai?igsh=bmN1eG1rcjc3M2wy&igsi=bmN1eG1rcjc3M2wy" target="_blank" rel="noopener noreferrer" style={{ color: '#e1306c', fontWeight: 600 }}>@outlookenterpriseschennai</a>
+                </p>
                 <p style={{ margin: 0 }}>
-                  📍 <strong>Factory & Office:</strong> Adambakkam, Chennai – 600 088
+                  📍 <strong>Factory & Office (Map):</strong> <a href="https://www.google.com/maps/search/?api=1&query=No.7,+3rd+Street,+Sasthri+Nagar,+Adambakkam,+Chennai+600088" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>No.7, 3rd St, Sasthri Nagar, Adambakkam, Chennai – 600 088</a>
                 </p>
               </div>
             </motion.div>

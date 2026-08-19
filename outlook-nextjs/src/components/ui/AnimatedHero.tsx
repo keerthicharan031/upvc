@@ -7,7 +7,7 @@ import { Zap, Sparkles, ShieldCheck, Volume2, SunMedium } from 'lucide-react';
 
 import { useTheme } from 'next-themes';
 
-const TOTAL_FRAMES = 49;
+const TOTAL_FRAMES = 50;
 
 export default function AnimatedHero() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -112,9 +112,9 @@ export default function AnimatedHero() {
       const now = Date.now();
       const isIdle = now - lastMouseTimeRef.current > 2000;
 
-      // Auto ping-pong scrub if mouse is idle / on mobile
+      // Auto ping-pong scrub at natural realistic video speed (no boundary pauses)
       if (!prefersReducedMotion && isIdle) {
-        targetFrameRef.current += autoPlayDirRef.current * 0.15;
+        targetFrameRef.current += autoPlayDirRef.current * 0.075;
         if (targetFrameRef.current >= TOTAL_FRAMES - 1) {
           targetFrameRef.current = TOTAL_FRAMES - 1;
           autoPlayDirRef.current = -1;
@@ -124,9 +124,9 @@ export default function AnimatedHero() {
         }
       }
 
-      // Smooth Lerp step (0.1 interpolation factor)
+      // Responsive lerp for natural video motion (0.09 interpolation factor)
       const diff = targetFrameRef.current - currentFrameRef.current;
-      currentFrameRef.current += diff * 0.12;
+      currentFrameRef.current += diff * 0.09;
 
       // Draw active frame to canvas using object-fit: cover aspect math
       const frameIdx = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.round(currentFrameRef.current)));
