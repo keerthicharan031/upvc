@@ -7,7 +7,6 @@ import path from 'path';
 
 // Server-side persistent in-memory store in globalThis
 declare global {
-  // eslint-disable-next-line no-var
   var __OUTLOOK_REVIEWS_STORE: Review[] | undefined;
 }
 
@@ -15,15 +14,15 @@ const REVIEWS_CACHE_FILE = path.join(process.cwd(), '.reviews_cache.json');
 
 const AVATAR_PALETTE = ['#3E7BFA', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#ec4899', '#f97316'];
 
-function loadServerReviews(): Review[] {
-  if (globalThis.__OUTLOOK_REVIEWS_STORE && Array.isArray(globalThis.__OUTLOOK_REVIEWS_STORE)) {
+function getInitialServerReviews(): Review[] {
+  if (globalThis.__OUTLOOK_REVIEWS_STORE) {
     return globalThis.__OUTLOOK_REVIEWS_STORE;
   }
 
   try {
     if (fs.existsSync(REVIEWS_CACHE_FILE)) {
-      const data = fs.readFileSync(REVIEWS_CACHE_FILE, 'utf-8');
-      const parsed = JSON.parse(data);
+      const content = fs.readFileSync(REVIEWS_CACHE_FILE, 'utf-8');
+      const parsed = JSON.parse(content);
       if (Array.isArray(parsed) && parsed.length > 0) {
         globalThis.__OUTLOOK_REVIEWS_STORE = parsed;
         return parsed;
@@ -33,8 +32,8 @@ function loadServerReviews(): Review[] {
     console.warn('Could not read .reviews_cache.json:', err);
   }
 
-  globalThis.__OUTLOOK_REVIEWS_STORE = [...INITIAL_REVIEWS];
-  return globalThis.__OUTLOOK_REVIEWS_STORE;
+  globalThis.__OUTLOOK_REVIEWS_STORE = INITIAL_REVIEWS;
+  return INITIAL_REVIEWS;
 }
 
 function saveServerReviews(reviews: Review[]) {
@@ -58,16 +57,16 @@ export async function GET() {
           .order('created_at', { ascending: false });
 
         if (!error && data && data.length > 0) {
-          const formatted = data.map((r: any) => ({
-            id: r.id,
-            name: r.name,
-            location: r.location,
+          const formatted = data.map((r: Record<string, unknown>) => ({
+            id: String(r.id),
+            name: String(r.name || ''),
+            location: String(r.location || ''),
             rating: Number(r.rating) || 5,
-            product: r.product,
-            comment: r.comment,
-            date: r.date,
+            product: String(r.product || ''),
+            comment: String(r.comment || ''),
+            date: String(r.date || ''),
             verified: Boolean(r.verified ?? true),
-            avatarBg: r.avatar_bg || r.avatarBg || '#3E7BFA',
+            avatarBg: String(r.avatar_bg || r.avatarBg || '#3E7BFA'),
             created_at: r.created_at,
           }));
 
@@ -81,7 +80,7 @@ export async function GET() {
       }
     }
 
-    const currentReviews = loadServerReviews();
+    const currentReviews = getInitialServerReviews();
     return NextResponse.json({
       success: true,
       source: 'server_store',
@@ -90,7 +89,7 @@ export async function GET() {
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error';
-    const fallbackReviews = loadServerReviews();
+    const fallbackReviews = getInitialServerReviews();
     return NextResponse.json(
       { success: false, error: message, reviews: fallbackReviews },
       { status: 500 }
@@ -132,8 +131,8 @@ export async function POST(req: NextRequest) {
     };
 
     // 1. Save to server store
-    const current = loadServerReviews();
-    const updated = [newReview, ...current.filter((r) => r.id !== newReview.id)];
+    const current = getInitialServerReviews();
+    const updated = [newReview, ...current.filter((r: Review) => r.id !== newReview.id)];
     saveServerReviews(updated);
 
     let savedToSupabase = false;

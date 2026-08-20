@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useSyncExternalStore } from 'react';
 
 interface BumpListProps {
   children: React.ReactNode;
@@ -9,6 +9,15 @@ interface BumpListProps {
   neighborScale?: number;
   direction?: 'horizontal' | 'vertical';
   liftPx?: number;
+}
+
+const emptySubscribe = () => () => {};
+function useIsTouchCapable() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0),
+    () => false
+  );
 }
 
 export default function BumpList({
@@ -21,15 +30,8 @@ export default function BumpList({
   liftPx = -4,
 }: BumpListProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const [isTouch, setIsTouch] = useState(false);
+  const isTouch = useIsTouchCapable();
   const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const touchCapable = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      setIsTouch(touchCapable);
-    }
-  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (isTouch || !containerRef.current) return;

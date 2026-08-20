@@ -7,7 +7,6 @@ import path from 'path';
 
 // Server-side persistent in-memory store in globalThis
 declare global {
-  // eslint-disable-next-line no-var
   var __OUTLOOK_LEADS_STORE: Lead[] | undefined;
 }
 

@@ -138,6 +138,7 @@ export function LeadProvider({ children }: { children: ReactNode }) {
 
   // Initial load and sync listeners
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadFromStorage();
     setIsLoaded(true);
     refreshLeads();

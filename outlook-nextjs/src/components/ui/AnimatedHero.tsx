@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Zap, Sparkles, ShieldCheck, Volume2, SunMedium } from 'lucide-react';
@@ -9,28 +9,30 @@ import { useTheme } from 'next-themes';
 
 const TOTAL_FRAMES = 50;
 
+const emptySubscribe = () => () => {};
+function useIsMounted() {
+  return useSyncExternalStore(emptySubscribe, () => true, () => false);
+}
+
 export default function AnimatedHero() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
   const [isLoaded, setIsLoaded] = useState(false);
   const [loadProgress, setLoadProgress] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsMounted();
   const { theme, resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const isDark = mounted ? (resolvedTheme || theme) === 'dark' : true;
 
   // Animation & Lerp references
   const currentFrameRef = useRef<number>(0);
   const targetFrameRef = useRef<number>(0);
-  const lastMouseTimeRef = useRef<number>(Date.now());
+  const lastMouseTimeRef = useRef<number>(0);
   const autoPlayDirRef = useRef<number>(1); // 1 = forward, -1 = reverse
 
   useEffect(() => {
+    lastMouseTimeRef.current = Date.now();
     // 1. Check prefers-reduced-motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -199,6 +201,7 @@ export default function AnimatedHero() {
       />
 
       {/* 2. Poster Fallback for Initial Paint / Static Fallback */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/hero-poster.jpg"
         alt=""

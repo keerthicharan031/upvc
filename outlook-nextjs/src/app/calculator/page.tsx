@@ -1,5 +1,5 @@
 'use client';
-import { useState, Suspense } from 'react';
+import { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
@@ -26,7 +26,6 @@ type FormData = z.infer<typeof schema>;
 
 function CalculatorContent() {
   const router = useRouter();
-  const [config, setConfig] = useState<CalculatorConfig | null>(null);
 
   const { register, watch, handleSubmit } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -82,7 +81,6 @@ function CalculatorContent() {
 
   const onSubmit = (data: FormData) => {
     const cfg = calcConfig(data);
-    setConfig(cfg);
     const params = new URLSearchParams({
       source: 'calculator',
       width: String(cfg.width),

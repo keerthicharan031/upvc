@@ -79,6 +79,7 @@ export function ReviewsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadFromStorage();
     setIsLoaded(true);
     refreshReviews();

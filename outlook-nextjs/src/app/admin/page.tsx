@@ -1,10 +1,8 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useSyncExternalStore } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  BarChart,
-  Bar,
   LineChart,
   Line,
   PieChart,
@@ -14,7 +12,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
 import {
@@ -33,12 +30,7 @@ import {
   RefreshCw,
   Eye,
   X,
-  CheckCircle2,
   Database,
-  Cloud,
-  Globe,
-  ExternalLink,
-  HelpCircle,
 } from 'lucide-react';
 import { useLeads, parseLeadValue } from '@/lib/store';
 import { MONTHLY_DATA } from '@/lib/data';
@@ -172,10 +164,14 @@ function LoginForm({ onLogin }: { onLogin: () => void }) {
   );
 }
 
+const emptySubscribe = () => () => {};
+function useIsMounted() {
+  return useSyncExternalStore(emptySubscribe, () => true, () => false);
+}
+
 export default function AdminPage() {
   const {
     leads,
-    isLoaded,
     isCloudConnected,
     isSyncing,
     syncError,
@@ -187,16 +183,20 @@ export default function AdminPage() {
   } = useLeads();
   const [statusFilter, setStatusFilter] = useState<FilterStatus>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [mounted, setMounted] = useState(false);
+  const mounted = useIsMounted();
   const [authenticated, setAuthenticated] = useState(false);
   const [selectedLead, setSelectedLead] = useState<Lead | null>(null);
   const [showSetupModal, setShowSetupModal] = useState(false);
   const [toastMsg, setToastMsg] = useState<string | null>(null);
 
   useEffect(() => {
-    setMounted(true);
-    const isAuth = sessionStorage.getItem('admin_authenticated') === 'true';
-    setAuthenticated(isAuth);
+    if (typeof window !== 'undefined') {
+      const isAuth = sessionStorage.getItem('admin_authenticated') === 'true';
+      if (isAuth) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setAuthenticated(true);
+      }
+    }
   }, []);
 
   const showToast = (msg: string) => {
@@ -699,7 +699,8 @@ export default function AdminPage() {
                 <XAxis dataKey="month" stroke="rgba(255,255,255,0.5)" style={{ fontSize: '0.78rem' }} />
                 <YAxis stroke="rgba(255,255,255,0.5)" style={{ fontSize: '0.78rem' }} tickFormatter={(val) => `₹${(val / 100000).toFixed(0)}L`} />
                 <Tooltip
-                  formatter={(val: any) => [`₹ ${Number(val).toLocaleString('en-IN')}`, 'Revenue']}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  formatter={(val: any) => [`₹ ${Number(val || 0).toLocaleString('en-IN')}`, 'Revenue']}
                   contentStyle={{
                     background: 'rgba(6, 17, 31, 0.95)',
                     border: '1px solid rgba(255,255,255,0.2)',
@@ -751,7 +752,8 @@ export default function AdminPage() {
                   ))}
                 </Pie>
                 <Tooltip
-                  formatter={(val: any, name: any) => [`${val} Inquiries`, name]}
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  formatter={(val: any, name: any) => [`${val} Inquiries`, String(name || '')]}
                   contentStyle={{
                     background: 'rgba(6, 17, 31, 0.95)',
                     border: '1px solid rgba(255,255,255,0.2)',

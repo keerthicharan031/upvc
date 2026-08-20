@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, Suspense } from 'react';
+import { useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { PROFILE_COLORS, GLASS_TYPES, GRILL_OPTIONS, SYSTEM_TYPES } from '@/lib/data';

@@ -18,7 +18,6 @@ import {
   ThumbsUp,
 } from 'lucide-react';
 import { useReviews } from '@/lib/reviewsStore';
-import type { Review } from '@/lib/types';
 
 const PRODUCT_LIST = [
   '3-Track Sliding Windows with SS Mesh',

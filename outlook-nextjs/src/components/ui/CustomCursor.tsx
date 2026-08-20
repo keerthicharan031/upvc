@@ -1,5 +1,17 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+
+const emptySubscribe = () => () => {};
+function useIsTouchDevice() {
+  return useSyncExternalStore(
+    emptySubscribe,
+    () => {
+      if (typeof window === 'undefined') return false;
+      return window.matchMedia('(pointer: coarse)').matches || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    },
+    () => false
+  );
+}
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
@@ -12,19 +24,11 @@ export default function CustomCursor() {
 
   const [isHovered, setIsHovered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  const isTouchDevice = useIsTouchDevice();
   const [isMouseDown, setIsMouseDown] = useState(false);
 
   useEffect(() => {
-    // Check if touch device
-    if (typeof window === 'undefined') return;
-    const isCoarse = window.matchMedia('(pointer: coarse)').matches;
-    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-    if (isCoarse || hasTouch) {
-      setIsTouchDevice(true);
-      return;
-    }
+    if (isTouchDevice) return;
 
     const onMouseMove = (e: MouseEvent) => {
       mouse.current.x = e.clientX;
@@ -84,7 +88,7 @@ export default function CustomCursor() {
       document.body.removeEventListener('mouseenter', onMouseEnter);
       cancelAnimationFrame(rafId);
     };
-  }, [isVisible]);
+  }, [isVisible, isTouchDevice]);
 
   if (isTouchDevice) return null;
 

@@ -1,1 +1,34 @@
-node_modules
+# dependencies
+node_modules/
+/.pnp
+.pnp.*
+
+# next.js build output
+.next/
+outlook-nextjs/.next/
+out/
+build/
+
+# env files (secrets & environment variables)
+.env
+.env.*
+!.env.example
+outlook-nextjs/.env
+outlook-nextjs/.env.*
+!outlook-nextjs/.env.example
+
+# debug & logs
+*.log
+npm-debug.log*
+
+# vercel
+.vercel/
+
+# cache files
+*.cache.json
+.leads_cache.json
+.reviews_cache.json
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -9,7 +9,7 @@ import { useState } from 'react';
 import { useLeads } from '@/lib/store';
 import PriceSummaryCard from '@/components/ui/PriceSummaryCard';
 import type { VisualizerConfig, CalculatorConfig, Lead } from '@/lib/types';
-import { CheckCircle, Send, Loader2, AlertCircle, MessageCircle, Phone, ArrowLeft, Copy, Check } from 'lucide-react';
+import { CheckCircle, Send, Loader2, AlertCircle, MessageCircle, ArrowLeft, Copy, Check } from 'lucide-react';
 
 const schema = z.object({
   name: z.string().min(2, 'Please enter your full name (at least 2 characters)'),

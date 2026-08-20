@@ -76,13 +76,13 @@ export const scaleIn: Variants = {
 };
 
 // ─── Card Hover ──────────────────────────────────────────────────
-export const cardHover: any = {
+export const cardHover: Record<string, unknown> = {
   whileHover: { y: -6, transition: { duration: 0.2, ease: 'easeOut' } },
   whileTap: { scale: 0.98 },
 };
 
 // ─── Button interactions ─────────────────────────────────────────
-export const buttonTap: any = {
+export const buttonTap: Record<string, unknown> = {
   whileTap: { scale: 0.95 },
   whileHover: { scale: 1.02 },
   transition: { type: 'spring', stiffness: 400, damping: 17 },
@@ -131,7 +131,7 @@ export function motionSafe<T extends Variants>(variants: T): T {
     for (const key in variants) {
       const v = variants[key];
       if (typeof v === 'object' && v !== null && !Array.isArray(v)) {
-        safeVariants[key] = { opacity: (v as Record<string, unknown>).opacity ?? 1 } as any;
+        safeVariants[key] = { opacity: Number((v as Record<string, unknown>).opacity ?? 1) };
       }
     }
     return safeVariants as T;
