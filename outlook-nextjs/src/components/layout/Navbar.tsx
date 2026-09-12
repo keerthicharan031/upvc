@@ -36,7 +36,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const currentTheme = mounted ? (resolvedTheme || theme) : 'dark';
+  const currentTheme = mounted ? (resolvedTheme || theme) : 'light';
   const isDark = currentTheme === 'dark';
 
   return (

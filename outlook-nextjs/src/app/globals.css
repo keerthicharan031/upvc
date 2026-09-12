@@ -2,55 +2,6 @@
 
 /* ─── Brand Design Tokens ──────────────────────────────────────── */
 :root,
-[data-theme="dark"],
-.dark {
-  --color-bg: #13151a;
-  --color-charcoal: #1C1E22;
-  --color-charcoal-deep: #13151a;
-  --color-cool-white: #F7F8FA;
-  --color-accent: #3E7BFA;
-  --color-accent-light: #6699ff;
-  --color-accent-dark: #2563eb;
-  --color-oak: #8C5627;
-  --color-oak-light: #b5773a;
-  --color-surface: #22262d;
-  --color-surface-2: #2a2f38;
-  --color-surface-3: #323842;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-accent: rgba(62, 123, 250, 0.3);
-  --color-text-primary: #F7F8FA;
-  --color-text-secondary: #94a3b8;
-  --color-text-muted: #64748b;
-
-  /* Badge colors */
-  --badge-blue-bg: rgba(62, 123, 250, 0.15);
-  --badge-blue-text: #7eb3ff;
-  --badge-green-bg: rgba(16, 185, 129, 0.15);
-  --badge-green-text: #34d399;
-  --badge-gold-bg: rgba(245, 158, 11, 0.15);
-  --badge-gold-text: #fbbf24;
-
-  /* Glassmorphism */
-  --glass-bg: rgba(34, 38, 45, 0.7);
-  --glass-bg-strong: rgba(34, 38, 45, 0.9);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --glass-blur: blur(20px);
-
-  /* Navigation & Elements */
-  --nav-bg: rgba(19, 21, 26, 0.88);
-  --nav-mobile-bg: rgba(19, 21, 26, 0.97);
-  --canvas-bg: #060B18;
-  --input-bg: rgba(255, 255, 255, 0.05);
-  --btn-secondary-bg: rgba(255, 255, 255, 0.05);
-  --btn-secondary-border: rgba(255, 255, 255, 0.08);
-  --btn-secondary-hover: rgba(255, 255, 255, 0.1);
-  --section-alt-bg: rgba(0, 0, 0, 0.18);
-  --table-alt-row: rgba(255, 255, 255, 0.015);
-  --modal-overlay-bg: rgba(4, 11, 20, 0.85);
-  --scrollbar-track: #13151a;
-  --scrollbar-thumb: #2a2f38;
-}
-
 [data-theme="light"],
 .light,
 html.light {
@@ -99,6 +50,56 @@ html.light {
   --modal-overlay-bg: rgba(15, 23, 42, 0.6);
   --scrollbar-track: #F1F5F9;
   --scrollbar-thumb: #CBD5E1;
+}
+
+[data-theme="dark"],
+.dark,
+html.dark {
+  --color-bg: #13151a;
+  --color-charcoal: #1C1E22;
+  --color-charcoal-deep: #13151a;
+  --color-cool-white: #F7F8FA;
+  --color-accent: #3E7BFA;
+  --color-accent-light: #6699ff;
+  --color-accent-dark: #2563eb;
+  --color-oak: #8C5627;
+  --color-oak-light: #b5773a;
+  --color-surface: #22262d;
+  --color-surface-2: #2a2f38;
+  --color-surface-3: #323842;
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-accent: rgba(62, 123, 250, 0.3);
+  --color-text-primary: #F7F8FA;
+  --color-text-secondary: #94a3b8;
+  --color-text-muted: #64748b;
+
+  /* Badge colors */
+  --badge-blue-bg: rgba(62, 123, 250, 0.15);
+  --badge-blue-text: #7eb3ff;
+  --badge-green-bg: rgba(16, 185, 129, 0.15);
+  --badge-green-text: #34d399;
+  --badge-gold-bg: rgba(245, 158, 11, 0.15);
+  --badge-gold-text: #fbbf24;
+
+  /* Glassmorphism */
+  --glass-bg: rgba(34, 38, 45, 0.7);
+  --glass-bg-strong: rgba(34, 38, 45, 0.9);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-blur: blur(20px);
+
+  /* Navigation & Elements */
+  --nav-bg: rgba(19, 21, 26, 0.88);
+  --nav-mobile-bg: rgba(19, 21, 26, 0.97);
+  --canvas-bg: #060B18;
+  --input-bg: rgba(255, 255, 255, 0.05);
+  --btn-secondary-bg: rgba(255, 255, 255, 0.05);
+  --btn-secondary-border: rgba(255, 255, 255, 0.08);
+  --btn-secondary-hover: rgba(255, 255, 255, 0.1);
+  --section-alt-bg: rgba(0, 0, 0, 0.18);
+  --table-alt-row: rgba(255, 255, 255, 0.015);
+  --modal-overlay-bg: rgba(4, 11, 20, 0.85);
+  --scrollbar-track: #13151a;
+  --scrollbar-thumb: #2a2f38;
 }
 
 /* ─── Base Reset ─────────────────────────────────────────────── */
