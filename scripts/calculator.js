@@ -7,7 +7,7 @@ const CalculatorEngine = {
   },
 
   bindEvents() {
-    const inputs = ['calc-width', 'calc-height', 'calc-qty', 'calc-type', 'calc-color', 'calc-glass', 'calc-lock', 'calc-mesh'];
+    const inputs = ['calc-width', 'calc-height', 'calc-qty', 'calc-type', 'calc-color', 'calc-glass', 'calc-mesh', 'calc-distance'];
     inputs.forEach(id => {
       const elem = document.getElementById(id);
       if (elem) {
@@ -26,10 +26,11 @@ const CalculatorEngine = {
     const width = parseFloat(document.getElementById('calc-width')?.value || 6);
     const height = parseFloat(document.getElementById('calc-height')?.value || 4);
     const qty = parseInt(document.getElementById('calc-qty')?.value || 1);
-    const typeSqFtRate = parseFloat(document.getElementById('calc-type')?.value || 480);
+    const distance = parseFloat(document.getElementById('calc-distance')?.value || 10);
+    const typeSqFtRate = parseFloat(document.getElementById('calc-type')?.value || 350);
     const colorId = document.getElementById('calc-color')?.value || "white";
-    const glassId = document.getElementById('calc-glass')?.value || "double";
-    const lockCost = parseFloat(document.getElementById('calc-lock')?.value || 0);
+    const glassId = document.getElementById('calc-glass')?.value || "5mm";
+
     const hasMesh = document.getElementById('calc-mesh')?.checked || false;
 
     const colorObj = UPVC_DATA.profileColors.find(c => c.id === colorId) || UPVC_DATA.profileColors[0];
@@ -41,23 +42,22 @@ const CalculatorEngine = {
     const baseFrameCost = totalArea * typeSqFtRate * colorObj.baseCostMultiplier;
     const glazingCost = baseFrameCost * (glassObj.factor - 1.0);
     const meshCost = hasMesh ? (150 * totalArea) : 0;
-    const hardwareCost = lockCost * qty;
-    const subtotalMaterial = baseFrameCost + glazingCost + meshCost + hardwareCost;
-    
-    const installCost = totalArea * 45; // ₹45 per sq ft installation
-    const subtotal = subtotalMaterial + installCost;
+    const subtotalMaterial = baseFrameCost + glazingCost + meshCost;
+
+    const transportCost = distance * 50; // ₹50 per km transport
+    const subtotal = subtotalMaterial + transportCost;
     const gst = subtotal * 0.18; // 18% GST
     const grandTotal = subtotal + gst;
 
     // Update DOM UI
     this.updateText('receipt-sqft', `${totalArea.toFixed(1)} sq. ft (${qty} Unit${qty > 1 ? 's' : ''})`);
     this.updateText('receipt-material', `₹ ${Math.round(subtotalMaterial).toLocaleString('en-IN')}`);
-    this.updateText('receipt-install', `₹ ${Math.round(installCost).toLocaleString('en-IN')}`);
+    this.updateText('receipt-transport', `₹ ${Math.round(transportCost).toLocaleString('en-IN')}`);
     this.updateText('receipt-gst', `₹ ${Math.round(gst).toLocaleString('en-IN')}`);
     this.updateText('receipt-total', `₹ ${Math.round(grandTotal).toLocaleString('en-IN')}`);
 
     this.currentQuote = {
-      width, height, qty, totalArea, subtotalMaterial, installCost, gst, grandTotal,
+      width, height, qty, totalArea, subtotalMaterial, transportCost, gst, grandTotal,
       colorName: colorObj.name, glassName: glassObj.name, date: new Date().toLocaleDateString('en-IN')
     };
   },
@@ -126,7 +126,7 @@ const CalculatorEngine = {
             </tr>
             <tr>
               <td>Glass & Hardware</td>
-              <td>${q.glassName} Glazing + Locks</td>
+              <td>${q.glassName} Glazing</td>
               <td>Included</td>
             </tr>
             <tr>
@@ -135,9 +135,9 @@ const CalculatorEngine = {
               <td>₹ ${Math.round(q.subtotalMaterial).toLocaleString('en-IN')}</td>
             </tr>
             <tr>
-              <td>On-Site Installation</td>
-              <td>Precision alignment & Silicone Sealing</td>
-              <td>₹ ${Math.round(q.installCost).toLocaleString('en-IN')}</td>
+              <td>Transport Charge (depends on distance)</td>
+              <td>₹50 per kilometer</td>
+              <td>₹ ${Math.round(q.transportCost).toLocaleString('en-IN')}</td>
             </tr>
             <tr>
               <td>GST (18%)</td>
@@ -161,9 +161,9 @@ const CalculatorEngine = {
         <script>
           window.onload = function() { window.print(); }
         </script>
-      </body>
-      </html>
-    `);
+      </body >
+      </html >
+  `);
     windowWin.document.close();
   }
 };

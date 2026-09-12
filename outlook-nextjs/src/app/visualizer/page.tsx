@@ -90,12 +90,12 @@ function VisualizerContent() {
 
   const [system, setSystem] = useState(initialSystem);
   const [colorId, setColorId] = useState('white');
-  const [glassId, setGlassId] = useState('double');
+  const [glassId, setGlassId] = useState('5mm');
   const [grill, setGrill] = useState('none');
   const [mesh, setMesh] = useState(true);
 
   const selectedColor = PROFILE_COLORS.find((c) => c.id === colorId) || PROFILE_COLORS[0];
-  const selectedGlass = GLASS_TYPES.find((g) => g.id === glassId) || GLASS_TYPES[1];
+  const selectedGlass = GLASS_TYPES.find((g) => g.id === glassId) || GLASS_TYPES[0];
 
   const basePrice = system.baseRate * 15; // sq ft estimate for 3x5 ft
   const price = Math.round(

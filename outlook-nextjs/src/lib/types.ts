@@ -58,11 +58,11 @@ export interface CalculatorConfig {
   systemName: string;
   color: string;
   glass: string;
-  lock: string;
   mesh: boolean;
   totalArea: number;
+  distance: number;
   material: number;
-  installation: number;
+  transport: number;
   gst: number;
   total: number;
 }

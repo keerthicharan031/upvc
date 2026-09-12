@@ -4,7 +4,7 @@ const CustomizerEngine = {
   state: {
     type: "sliding-win",
     colorId: "white",
-    glassId: "double",
+    glassId: "5mm",
     grill: "none",
     mesh: true,
     handle: "matte-black",

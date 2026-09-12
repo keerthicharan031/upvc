@@ -4,7 +4,7 @@ const UPVC_DATA = {
   products: [
     {
       id: "win-01",
-      name: "Ultra-Quiet Sliding Window",
+      name: "aluminium elevation work",
       category: "windows",
       tag: "Best Seller",
       badgeClass: "badge-blue",
@@ -28,7 +28,7 @@ const UPVC_DATA = {
     },
     {
       id: "win-03",
-      name: "Classic Casement Arch Window",
+      name: "french windows",
       category: "windows",
       tag: "Architectural",
       badgeClass: "badge-gold",
@@ -40,7 +40,7 @@ const UPVC_DATA = {
     },
     {
       id: "door-01",
-      name: "Heavy-Duty Lift & Slide Patio Door",
+      name: "upvc doors",
       category: "doors",
       tag: "Luxury Living",
       badgeClass: "badge-gold",
@@ -51,57 +51,53 @@ const UPVC_DATA = {
       colors: ["Anthracite Grey", "Jet Black", "Dark Walnut"]
     },
     {
-      id: "door-02",
-      name: "Royal French Balcony Door",
-      category: "doors",
-      tag: "Classic Elegance",
+      id: "win-04",
+      name: "Premium Interior Window",
+      category: "windows",
+      tag: "Interior",
       badgeClass: "badge-blue",
-      pricePerSqFt: 520,
-      image: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80",
-      description: "Double leaf outward opening French doors with decorative Georgian bars, multi-point shootbolts, and threshold seal.",
-      specs: ["Dual Sash Opening", "Anti-Burglary Locks", "Low-E Glazing", "Water Tightness Class 9A"],
-      colors: ["White", "Golden Oak", "Mahogany"]
+      pricePerSqFt: 550,
+      image: "/products/uploaded3.jpg",
+      description: "High-quality fluted glass interior window providing privacy while allowing natural light.",
+      specs: ["Fluted Privacy Glass", "Slim Aluminium Profile", "Acoustic Seal", "10 Year Warranty"],
+      colors: ["Champagne Gold", "White", "Black"]
     },
     {
-      id: "door-03",
-      name: "Bi-Fold Multi-Slide Door System",
-      category: "doors",
-      tag: "Panoramic",
-      badgeClass: "badge-green",
-      pricePerSqFt: 880,
-      image: "https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=800&q=80",
-      description: "Concertina folding doors that stack neatly to one side, completely seamless integration of indoor and outdoor space.",
-      specs: ["Concealed Hinges", "Stainless Steel Rollers", "99% UV Block", "Custom Panel Counts"],
-      colors: ["Anthracite Grey", "Jet Black", "White"]
-    },
-    {
-      id: "part-01",
-      name: "Acoustic Glass Office Partition",
-      category: "partitions",
-      tag: "Commercial",
-      badgeClass: "badge-blue",
-      pricePerSqFt: 490,
-      image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
-      description: "Sound-isolating modular UPVC room dividers designed for executive conference rooms and quiet home offices.",
-      specs: ["48 dB Sound Isolation", "Frosted/Smart Glass", "Integrated Blind System", "Slim Profile"],
+      id: "win-05",
+      name: "Modern Architectural Window",
+      category: "windows",
+      tag: "Architectural",
+      badgeClass: "badge-gold",
+      pricePerSqFt: 650,
+      image: "/products/uploaded2.jpg",
+      description: "Modern projecting architectural window with a custom sloped roof design for superior exterior aesthetics.",
+      specs: ["Weatherproof Roof", "Multi-Chambered UPVC", "Double Glazed", "High Wind Resistance"],
       colors: ["White", "Anthracite Grey"]
+    },
+    {
+      id: "win-06",
+      name: "Large Glass Elevation Window",
+      category: "windows",
+      tag: "Facade",
+      badgeClass: "badge-green",
+      pricePerSqFt: 850,
+      image: "/products/uploaded1.png",
+      description: "Towering multi-panel glass elevation system designed to span multiple floors with structural integrity.",
+      specs: ["Structural Glazing", "Toughened Safety Glass", "Maximum Daylight", "Thermal Break Profile"],
+      colors: ["Dark Walnut", "Jet Black"]
     }
   ],
 
   profileColors: [
     { id: "white", name: "Classic White", hex: "#ffffff", border: "#cbd5e1", baseCostMultiplier: 1.0 },
-    { id: "walnut", name: "Dark Walnut", hex: "#3d2314", border: "#27150a", baseCostMultiplier: 1.15 },
-    { id: "oak", name: "Golden Oak", hex: "#8c5627", border: "#5c3718", baseCostMultiplier: 1.15 },
-    { id: "anthracite", name: "Anthracite Grey", hex: "#334155", border: "#1e293b", baseCostMultiplier: 1.12 },
-    { id: "black", name: "Jet Black", hex: "#0f172a", border: "#020617", baseCostMultiplier: 1.18 }
+    { id: "walnut", name: "Dark Walnut", hex: "#3d2314", border: "#27150a", baseCostMultiplier: 2.0 },
+    { id: "oak", name: "Golden Oak", hex: "#8c5627", border: "#5c3718", baseCostMultiplier: 2.0 },
+    { id: "anthracite", name: "Anthracite Grey", hex: "#334155", border: "#1e293b", baseCostMultiplier: 2.0 },
+    { id: "black", name: "Jet Black", hex: "#0f172a", border: "#020617", baseCostMultiplier: 2.0 }
   ],
 
   glassTypes: [
-    { id: "single", name: "Single Toughened (6mm)", factor: 1.0, desc: "Standard safety glass" },
-    { id: "double", name: "Double Glazed DGU (24mm)", factor: 1.25, desc: "Optimal sound & thermal insulation" },
-    { id: "low-e", name: "Low-E Thermal Shield", factor: 1.40, desc: "Reflects heat, saves up to 40% AC bill" },
-    { id: "tinted", name: "Reflective Solar Tint", factor: 1.20, desc: "Privacy & glare reduction" },
-    { id: "frosted", name: "Frosted Satin Glass", factor: 1.15, desc: "100% privacy light diffusion" }
+    { id: "5mm", name: "5mm glass", factor: 1.0, desc: "Standard 5mm glass" }
   ],
 
   hardwareOptions: [

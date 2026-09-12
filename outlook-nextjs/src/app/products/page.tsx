@@ -76,7 +76,8 @@ export default function ProductsPage() {
             variants={staggerContainer}
             initial="hidden"
             animate={isInView ? 'visible' : 'hidden'}
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem' }}
+            style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1.5rem' }}
+            className="products-grid-custom"
           >
             {filtered.map((product) => (
               <ProductCard key={product.id} product={product} />

@@ -22,11 +22,11 @@ export default function PriceSummaryCard({ calcConfig, vizConfig, compact = fals
     { label: 'Total Area', value: calcConfig.totalArea ? `${calcConfig.totalArea.toFixed(1)} sq. ft` : '—' },
     { label: 'Profile Color', value: calcConfig.color || '—' },
     { label: 'Glass Upgrade', value: calcConfig.glass || '—' },
-    { label: 'Lock Hardware', value: calcConfig.lock || '—' },
+
     { label: 'Insect Mesh', value: calcConfig.mesh ? 'Yes' : 'No' },
     null, // divider
     { label: 'Material & Fabrication', value: calcConfig.material ? formatCurrency(calcConfig.material) : '—', accent: false },
-    { label: 'Installation (7.5%)', value: calcConfig.installation ? formatCurrency(calcConfig.installation) : '—', accent: false },
+    { label: 'Transport Charge (depends on distance)', value: calcConfig.transport ? formatCurrency(calcConfig.transport) : '—', accent: false },
     { label: 'GST (18%)', value: calcConfig.gst ? formatCurrency(calcConfig.gst) : '—', accent: false },
     { label: 'NET ESTIMATED TOTAL', value: calcConfig.total ? formatCurrency(calcConfig.total) : '—', accent: true, total: true },
   ] : vizConfig ? [

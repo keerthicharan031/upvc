@@ -287,7 +287,7 @@ export default function AdminPage() {
 
   // Add demo test lead to verify instant live updates
   const handleAddTestLead = () => {
-    const products = ['Ultra-Quiet Sliding Window', 'Lift & Slide Patio Door', 'European Tilt & Turn Window', 'French Balcony Door'];
+    const products = ['aluminium powder coated window', 'Lift & Slide Patio Door', 'European Tilt & Turn Window', 'French Balcony Door'];
     const names = ['Karthik Venkat', 'Lakshmi Priya', 'Sundarajan M.', 'Meera Krishnan', 'Arunachalam & Co.'];
     const randomProduct = products[Math.floor(Math.random() * products.length)];
     const randomName = names[Math.floor(Math.random() * names.length)];

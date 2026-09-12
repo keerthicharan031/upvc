@@ -798,6 +798,9 @@ img, video, canvas, iframe, svg {
    ══════════════════════════════════════ */
 @media (min-width: 768px) and (max-width: 1023px) {
   /* Product / project grids: 2 col */
+  .projects-grid, .products-grid-custom {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
   [style*="minmax(300px"] {
     grid-template-columns: repeat(2, 1fr) !important;
   }

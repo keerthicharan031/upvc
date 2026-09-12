@@ -45,7 +45,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           {project.category}
         </span>
         {project.area && (
-          <span style={{ position: 'absolute', top: 14, right: 14, background: 'rgba(19,21,26,0.7)', backdropFilter: 'blur(8px)', borderRadius: '0.4rem', padding: '0.25rem 0.6rem', fontSize: '0.75rem', color: 'var(--color-text-secondary)', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+          <span style={{ position: 'absolute', top: 14, right: 14, background: 'rgba(19,21,26,0.7)', backdropFilter: 'blur(8px)', borderRadius: '0.4rem', padding: '0.25rem 0.6rem', fontSize: '0.75rem', color: '#ffffff', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
             <Maximize2 size={11} />{project.area}
           </span>
         )}

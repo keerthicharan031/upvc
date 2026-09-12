@@ -241,11 +241,7 @@
           <div class="control-group" style="margin-top: 2rem;">
             <label class="control-label">3. Select Glass Glazing Type</label>
             <div class="chip-select">
-              <button class="option-chip" data-customizer-glass="single">6mm Toughened</button>
-              <button class="option-chip active" data-customizer-glass="double">24mm Double Glazed</button>
-              <button class="option-chip" data-customizer-glass="low-e">Low-E Thermal Shield</button>
-              <button class="option-chip" data-customizer-glass="tinted">Solar Blue Tint</button>
-              <button class="option-chip" data-customizer-glass="frosted">Frosted Privacy</button>
+              <button class="option-chip active" data-customizer-glass="5mm">5mm glass</button>
             </div>
           </div>
 
@@ -301,11 +297,12 @@
             <div class="form-group">
               <label>System Type</label>
               <select id="calc-type" class="form-control">
-                <option value="450">Sliding Window (Standard)</option>
-                <option value="580">Tilt & Turn European Window</option>
-                <option value="750">Lift & Slide Heavy Patio Door</option>
-                <option value="520">French Balcony Door</option>
-                <option value="490">Acoustic Glass Partition</option>
+                <option value="350">Sliding window</option>
+                <option value="450">Openable window</option>
+                <option value="550">2 Track French Sliding window</option>
+                <option value="650">3 Track French Sliding window</option>
+                <option value="750">French Openable window</option>
+                <option value="500">Sliding window with mesh</option>
               </select>
             </div>
           </div>
@@ -315,32 +312,25 @@
               <label>Profile Color</label>
               <select id="calc-color" class="form-control">
                 <option value="white">Classic White Profile</option>
-                <option value="walnut">Dark Walnut Wood Grain (+15%)</option>
-                <option value="oak">Golden Oak Laminated (+15%)</option>
-                <option value="anthracite">Anthracite Grey Matte (+12%)</option>
-                <option value="black">Jet Black Matte (+18%)</option>
+                <option value="walnut">Dark Walnut Wood Grain (+100%)</option>
+                <option value="oak">Golden Oak Laminated (+100%)</option>
+                <option value="anthracite">Anthracite Grey Matte (+100%)</option>
+                <option value="black">Jet Black Matte (+100%)</option>
               </select>
             </div>
 
             <div class="form-group">
               <label>Glass Upgrade</label>
               <select id="calc-glass" class="form-control">
-                <option value="single">6mm Single Toughened</option>
-                <option value="double" selected>24mm Double Glazed DGU (+25%)</option>
-                <option value="low-e">Low-E Thermal Shield (+40%)</option>
-                <option value="tinted">Solar Reflective Tint (+20%)</option>
+                <option value="5mm" selected>5mm glass</option>
               </select>
             </div>
           </div>
 
           <div class="dimension-row">
             <div class="form-group">
-              <label>Lock Hardware</label>
-              <select id="calc-lock" class="form-control">
-                <option value="0">Standard Single Lock</option>
-                <option value="1500" selected>German Multi-Point Shootbolt (+ ₹1,500/unit)</option>
-                <option value="4500">Biometric Smart Digital Handle (+ ₹4,500/unit)</option>
-              </select>
+              <label>Distance (km)</label>
+              <input type="number" id="calc-distance" class="form-control" value="10" min="0" max="1000" step="1" />
             </div>
 
             <div class="form-group" style="display: flex; align-items: center; gap: 0.6rem; margin-top: 1.8rem;">
@@ -365,8 +355,8 @@
           </div>
 
           <div class="receipt-row">
-            <span>On-Site Installation & Silicone:</span>
-            <span id="receipt-install">₹ 2,160</span>
+            <span>Transport Charge (depends on distance):</span>
+            <span id="receipt-transport">₹ 500</span>
           </div>
 
           <div class="receipt-row">

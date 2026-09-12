@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { SYSTEM_TYPES, PROFILE_COLORS, GLASS_TYPES, HARDWARE_OPTIONS, GST_RATE, INSTALLATION_RATE, MESH_COST_PER_UNIT } from '@/lib/data';
+import { SYSTEM_TYPES, PROFILE_COLORS, GLASS_TYPES, GST_RATE, MESH_COST_PER_UNIT } from '@/lib/data';
 import { fadeInUp } from '@/lib/animations';
 import PriceSummaryCard from '@/components/ui/PriceSummaryCard';
 import type { CalculatorConfig } from '@/lib/types';
@@ -18,7 +18,7 @@ const schema = z.object({
   systemId: z.string(),
   colorId: z.string(),
   glassId: z.string(),
-  lockId: z.string(),
+  distance: z.number().min(0).max(1000),
   mesh: z.boolean(),
 });
 
@@ -35,8 +35,8 @@ function CalculatorContent() {
       qty: 2,
       systemId: SYSTEM_TYPES[0].id,
       colorId: 'white',
-      glassId: 'double',
-      lockId: 'multi-lock',
+      glassId: '5mm',
+      distance: 10,
       mesh: true,
     },
   });
@@ -46,13 +46,12 @@ function CalculatorContent() {
   function calcConfig(data: FormData): CalculatorConfig {
     const sys = SYSTEM_TYPES.find((s) => s.id === data.systemId) || SYSTEM_TYPES[0];
     const col = PROFILE_COLORS.find((c) => c.id === data.colorId) || PROFILE_COLORS[0];
-    const gls = GLASS_TYPES.find((g) => g.id === data.glassId) || GLASS_TYPES[1];
-    const lock = HARDWARE_OPTIONS.find((h) => h.id === data.lockId) || HARDWARE_OPTIONS[0];
+    const gls = GLASS_TYPES.find((g) => g.id === data.glassId) || GLASS_TYPES[0];
 
     const totalArea = data.width * data.height * data.qty;
-    const material = Math.round(totalArea * sys.baseRate * col.baseCostMultiplier * gls.factor + lock.price * data.qty + (data.mesh ? MESH_COST_PER_UNIT * data.qty : 0));
-    const installation = Math.round(material * INSTALLATION_RATE);
-    const subtotal = material + installation;
+    const material = Math.round(totalArea * sys.baseRate * col.baseCostMultiplier * gls.factor + (data.mesh ? MESH_COST_PER_UNIT * data.qty : 0));
+    const transport = Math.round(data.distance * 50);
+    const subtotal = material + transport;
     const gst = Math.round(subtotal * GST_RATE);
     const total = subtotal + gst;
 
@@ -64,11 +63,11 @@ function CalculatorContent() {
       systemName: sys.name,
       color: col.name,
       glass: gls.name,
-      lock: lock.name,
       mesh: data.mesh,
       totalArea,
+      distance: data.distance,
       material,
-      installation,
+      transport,
       gst,
       total,
     };
@@ -89,11 +88,11 @@ function CalculatorContent() {
       systemName: cfg.systemName,
       color: cfg.color,
       glass: cfg.glass,
-      lock: cfg.lock,
       mesh: String(cfg.mesh),
       totalArea: String(cfg.totalArea),
+      distance: String(cfg.distance),
       material: String(cfg.material),
-      installation: String(cfg.installation),
+      transport: String(cfg.transport),
       gst: String(cfg.gst),
       total: String(cfg.total),
     });
@@ -119,11 +118,10 @@ function CalculatorContent() {
       ['Total Area', `${liveConfig.totalArea.toFixed(1)} sq. ft`],
       ['Profile Color', liveConfig.color],
       ['Glass Upgrade', liveConfig.glass],
-      ['Lock Hardware', liveConfig.lock],
       ['Insect Mesh', liveConfig.mesh ? 'Yes' : 'No'],
       ['', ''],
       ['Material & Fabrication', `Rs. ${liveConfig.material.toLocaleString('en-IN')}`],
-      ['Installation (7.5%)', `Rs. ${liveConfig.installation.toLocaleString('en-IN')}`],
+      ['Transport Charge (depends on distance)', `Rs. ${liveConfig.transport.toLocaleString('en-IN')}`],
       ['GST (18%)', `Rs. ${liveConfig.gst.toLocaleString('en-IN')}`],
       ['NET ESTIMATED TOTAL', `Rs. ${liveConfig.total.toLocaleString('en-IN')}`],
     ];
@@ -162,11 +160,12 @@ function CalculatorContent() {
             <h3 style={{ fontSize: '1.1rem', fontWeight: 700, marginBottom: '2rem' }}>Configure Your Quote</h3>
             <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
               {/* Dimensions */}
-              <div className="calc-dim-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem' }}>
+              <div className="calc-dim-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr 1fr', gap: '1rem' }}>
                 {[
                   { label: 'Width (ft)', name: 'width', min: 1, max: 25, step: 0.5 },
                   { label: 'Height (ft)', name: 'height', min: 1, max: 15, step: 0.5 },
                   { label: 'Quantity', name: 'qty', min: 1, max: 50, step: 1 },
+                  { label: 'Distance (km)', name: 'distance', min: 0, max: 1000, step: 1 },
                 ].map(({ label, name, min, max, step }) => (
                   <div key={name}>
                     <label style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', fontWeight: 500, marginBottom: '0.4rem', display: 'block' }}>{label}</label>
@@ -198,12 +197,7 @@ function CalculatorContent() {
                 </div>
               </div>
 
-              <div>
-                <label style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', fontWeight: 500, marginBottom: '0.4rem', display: 'block' }}>Lock Hardware</label>
-                <select className="form-control" {...register('lockId')}>
-                  {HARDWARE_OPTIONS.map((h) => <option key={h.id} value={h.id}>{h.name}{h.price > 0 ? ` (+₹${h.price.toLocaleString('en-IN')}/unit)` : ''}</option>)}
-                </select>
-              </div>
+
 
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                 <input type="checkbox" id="calc-mesh" className="form-control" style={{ width: 20, height: 20, flex: 'none' }} {...register('mesh')} />
@@ -243,7 +237,7 @@ function CalculatorContent() {
 
             <div style={{ background: 'rgba(16,185,129,0.06)', border: '1px solid rgba(16,185,129,0.2)', borderRadius: '0.75rem', padding: '1.25rem' }}>
               <p style={{ fontSize: '0.82rem', color: 'var(--color-text-secondary)', lineHeight: 1.6 }}>
-                ✅ <strong style={{ color: 'var(--color-text-primary)' }}>No-obligation estimate.</strong> Prices include material, fabrication & standard installation. Final price confirmed after free site survey.
+                ✅ <strong style={{ color: 'var(--color-text-primary)' }}>No-obligation estimate.</strong> Prices include material, fabrication & free standard installation. Transport calculated per km. Final price confirmed after free site survey.
               </p>
             </div>
           </motion.div>

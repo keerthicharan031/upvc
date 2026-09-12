@@ -4,12 +4,12 @@ import type { Product, Project, Lead, ProfileColor, GlassType, HardwareOption, M
 export const PRODUCTS: Product[] = [
   {
     id: 'win-01',
-    name: 'Ultra-Quiet Sliding Window',
+    name: 'aluminium elevation work',
     category: 'windows',
     tag: 'Best Seller',
     badgeClass: 'badge-blue',
     pricePerSqFt: 450,
-    image: 'https://images.unsplash.com/photo-1503708928676-1cb796a0891e?auto=format&fit=crop&w=800&q=80',
+    image: '/products/new.jpeg',
     description: 'Multi-track sliding UPVC window system with reinforced steel cores and dust-proof EPDM weather gaskets.',
     specs: ['42 dB Noise Reduction', 'Double Glazed 24mm', 'Multi-Point Lock', '10 Year Warranty'],
     colors: ['White', 'Dark Walnut', 'Anthracite Grey'],
@@ -21,74 +21,83 @@ export const PRODUCTS: Product[] = [
     tag: 'Thermal Tech',
     badgeClass: 'badge-green',
     pricePerSqFt: 580,
-    image: 'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=800&q=80',
+    image: '/products/new1.jpeg',
     description: 'Dual-action German engineered window that tilts inward for micro-ventilation and opens 90° for easy cleaning.',
     specs: ['Uw = 1.1 W/m²K', 'Triple Glazed Option', 'High Wind Resistance', 'Air-tight Seal'],
     colors: ['Golden Oak', 'Jet Black', 'White'],
   },
   {
     id: 'win-03',
-    name: 'Classic Casement Arch Window',
+    name: 'french windows',
     category: 'windows',
     tag: 'Architectural',
     badgeClass: 'badge-gold',
     pricePerSqFt: 620,
-    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80',
+    image: '/products/new2.jpeg',
     description: 'Custom arched top casement window providing maximum daylight, classical aesthetics, and storm proofing.',
     specs: ['Custom Curvature', 'Toughened Safety Glass', 'Brass/Chrome Hardware', 'UV Protection'],
     colors: ['White', 'Mahogany', 'Dark Walnut'],
   },
   {
     id: 'door-01',
-    name: 'Heavy-Duty Lift & Slide Patio Door',
+    name: 'upvc doors',
     category: 'doors',
     tag: 'Luxury Living',
     badgeClass: 'badge-gold',
     pricePerSqFt: 750,
-    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80',
+    image: '/products/new3.jpeg',
     description: 'Massive span sliding doors featuring effortless fingertip operation, flush low-threshold track, and panoramic views.',
     specs: ['Spans up to 6 Meters', '300kg Sash Load', 'Acoustic Glazing', 'Multi-layer Lock'],
     colors: ['Anthracite Grey', 'Jet Black', 'Dark Walnut'],
   },
   {
-    id: 'door-02',
-    name: 'Royal French Balcony Door',
-    category: 'doors',
-    tag: 'Classic Elegance',
+    id: 'win-04',
+    name: 'aluminium elevation work',
+    category: 'windows',
+    tag: 'Interior',
     badgeClass: 'badge-blue',
-    pricePerSqFt: 520,
-    image: 'https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=800&q=80',
-    description: 'Double leaf outward opening French doors with decorative Georgian bars, multi-point shootbolts, and threshold seal.',
-    specs: ['Dual Sash Opening', 'Anti-Burglary Locks', 'Low-E Glazing', 'Water Tightness Class 9A'],
-    colors: ['White', 'Golden Oak', 'Mahogany'],
+    pricePerSqFt: 550,
+    image: '/products/uploaded3.jpg',
+    description: 'High-quality fluted glass interior window providing privacy while allowing natural light.',
+    specs: ['Fluted Privacy Glass', 'Slim Aluminium Profile', 'Acoustic Seal', '10 Year Warranty'],
+    colors: ['Champagne Gold', 'White', 'Black'],
   },
   {
-    id: 'door-03',
-    name: 'Bi-Fold Multi-Slide Door System',
-    category: 'doors',
-    tag: 'Panoramic',
-    badgeClass: 'badge-green',
-    pricePerSqFt: 880,
-    image: 'https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=800&q=80',
-    description: 'Concertina folding doors that stack neatly to one side, completely seamless integration of indoor and outdoor space.',
-    specs: ['Concealed Hinges', 'Stainless Steel Rollers', '99% UV Block', 'Custom Panel Counts'],
-    colors: ['Anthracite Grey', 'Jet Black', 'White'],
-  },
-  {
-    id: 'part-01',
-    name: 'Acoustic Glass Office Partition',
-    category: 'partitions',
-    tag: 'Commercial',
-    badgeClass: 'badge-blue',
-    pricePerSqFt: 490,
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
-    description: 'Sound-isolating modular UPVC room dividers designed for executive conference rooms and quiet home offices.',
-    specs: ['48 dB Sound Isolation', 'Frosted/Smart Glass', 'Integrated Blind System', 'Slim Profile'],
+    id: 'win-05',
+    name: 'aluminium windows',
+    category: 'windows',
+    tag: 'Architectural',
+    badgeClass: 'badge-gold',
+    pricePerSqFt: 650,
+    image: '/products/uploaded2.jpg',
+    description: 'Modern projecting architectural window with a custom sloped roof design for superior exterior aesthetics.',
+    specs: ['Weatherproof Roof', 'Multi-Chambered UPVC', 'Double Glazed', 'High Wind Resistance'],
     colors: ['White', 'Anthracite Grey'],
   },
+  {
+    id: 'win-06',
+    name: 'upvc window',
+    category: 'windows',
+    tag: 'Facade',
+    badgeClass: 'badge-green',
+    pricePerSqFt: 850,
+    image: '/products/uploaded4.png',
+    description: 'Towering multi-panel glass elevation system designed to span multiple floors with structural integrity.',
+    specs: ['Structural Glazing', 'Toughened Safety Glass', 'Maximum Daylight', 'Thermal Break Profile'],
+    colors: ['Dark Walnut', 'Jet Black'],
+  }
 ];
 
 export const PROJECTS: Project[] = [
+  {
+    title: 'false ceiling',
+    location: 'Chennai',
+    category: 'Residential',
+    image: '/projects/false-ceiling.jpg',
+    details: 'Premium false ceiling design.',
+    productUsed: 'False Ceiling',
+    area: '1,000 sq ft',
+  },
   {
     title: 'Executive Villa Sliding Doors',
     location: 'Adambakkam, Chennai',
@@ -145,18 +154,14 @@ export const INITIAL_LEADS: Lead[] = [
 
 export const PROFILE_COLORS: ProfileColor[] = [
   { id: 'white', name: 'Classic White', hex: '#ffffff', border: '#cbd5e1', baseCostMultiplier: 1.0 },
-  { id: 'walnut', name: 'Dark Walnut', hex: '#3d2314', border: '#27150a', baseCostMultiplier: 1.15 },
-  { id: 'oak', name: 'Golden Oak', hex: '#8c5627', border: '#5c3718', baseCostMultiplier: 1.15 },
-  { id: 'anthracite', name: 'Anthracite Grey', hex: '#334155', border: '#1e293b', baseCostMultiplier: 1.12 },
-  { id: 'black', name: 'Jet Black', hex: '#0f172a', border: '#020617', baseCostMultiplier: 1.18 },
+  { id: 'walnut', name: 'Dark Walnut', hex: '#3d2314', border: '#27150a', baseCostMultiplier: 2.0 },
+  { id: 'oak', name: 'Golden Oak', hex: '#8c5627', border: '#5c3718', baseCostMultiplier: 2.0 },
+  { id: 'anthracite', name: 'Anthracite Grey', hex: '#334155', border: '#1e293b', baseCostMultiplier: 2.0 },
+  { id: 'black', name: 'Jet Black', hex: '#0f172a', border: '#020617', baseCostMultiplier: 2.0 },
 ];
 
 export const GLASS_TYPES: GlassType[] = [
-  { id: 'single', name: '6mm Single Toughened', factor: 1.0, desc: 'Standard safety glass' },
-  { id: 'double', name: '24mm Double Glazed DGU', factor: 1.25, desc: 'Optimal sound & thermal insulation' },
-  { id: 'low-e', name: 'Low-E Thermal Shield', factor: 1.40, desc: 'Reflects heat, saves up to 40% AC bill' },
-  { id: 'tinted', name: 'Solar Blue Tint', factor: 1.20, desc: 'Privacy & glare reduction' },
-  { id: 'frosted', name: 'Frosted Satin Privacy', factor: 1.15, desc: '100% privacy light diffusion' },
+  { id: '5mm', name: '5mm glass', factor: 1.0, desc: 'Standard 5mm glass' },
 ];
 
 export const HARDWARE_OPTIONS: HardwareOption[] = [
@@ -166,11 +171,12 @@ export const HARDWARE_OPTIONS: HardwareOption[] = [
 ];
 
 export const SYSTEM_TYPES = [
-  { id: 'sliding-win', name: '2-Track Sliding Window', baseRate: 450 },
-  { id: 'tilt-turn', name: 'European Tilt & Turn', baseRate: 580 },
-  { id: 'french-door', name: 'French Balcony Door', baseRate: 520 },
-  { id: 'lift-slide', name: 'Lift & Slide Patio Door', baseRate: 750 },
-  { id: 'acoustic-partition', name: 'Acoustic Glass Partition', baseRate: 490 },
+  { id: 'sliding-win', name: 'Sliding window', baseRate: 350 },
+  { id: 'openable-win', name: 'Openable window', baseRate: 450 },
+  { id: '2-track-french', name: '2 Track French Sliding window', baseRate: 550 },
+  { id: '3-track-french', name: '3 Track French Sliding window', baseRate: 650 },
+  { id: 'french-openable', name: 'French Openable window', baseRate: 750 },
+  { id: 'sliding-win-mesh', name: 'Sliding window with mesh', baseRate: 500 },
 ];
 
 export const GRILL_OPTIONS = [
@@ -196,7 +202,6 @@ export const LEAD_SOURCES: LeadSourceData[] = [
 ];
 
 export const GST_RATE = 0.18;
-export const INSTALLATION_RATE = 0.075; // 7.5% of material cost
 export const MESH_COST_PER_UNIT = 800;
 
 export const INITIAL_REVIEWS: Review[] = [
