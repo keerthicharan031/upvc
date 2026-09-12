@@ -107,6 +107,7 @@ button, input, select, textarea {
 .text-gradient {
   background: var(--brand-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
