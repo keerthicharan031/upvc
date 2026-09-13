@@ -30,6 +30,15 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'Outlook Enterprises',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/favicon.png' },
+    ],
+  },
 };
 
 // Viewport must be a separate named export in Next.js 13+
