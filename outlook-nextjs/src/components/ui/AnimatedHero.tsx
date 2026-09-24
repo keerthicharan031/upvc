@@ -79,56 +79,21 @@ export default function AnimatedHero() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // 4. Mouse Scrubbing Listener
-    const handleMouseMove = (e: MouseEvent) => {
-      if (prefersReducedMotion) return;
-      lastMouseTimeRef.current = Date.now();
-      const rect = containerRef.current?.getBoundingClientRect();
-      if (!rect) return;
-
-      // Mouse X ratio across the container (0.0 to 1.0)
-      const relativeX = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-      targetFrameRef.current = relativeX * (TOTAL_FRAMES - 1);
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (prefersReducedMotion || !e.touches[0]) return;
-      lastMouseTimeRef.current = Date.now();
-      const rect = containerRef.current?.getBoundingClientRect();
-      if (!rect) return;
-
-      const relativeX = Math.max(0, Math.min(1, (e.touches[0].clientX - rect.left) / rect.width));
-      targetFrameRef.current = relativeX * (TOTAL_FRAMES - 1);
-    };
-
-    const containerEl = containerRef.current;
-    if (containerEl) {
-      containerEl.addEventListener('mousemove', handleMouseMove);
-      containerEl.addEventListener('touchmove', handleTouchMove, { passive: true });
-    }
-
-    // 5. Render Loop with LERP
+    // 4. Render Loop with LERP
     let animFrameId: number;
 
     const render = () => {
-      const now = Date.now();
-      const isIdle = now - lastMouseTimeRef.current > 2000;
-
-      // Auto ping-pong scrub at natural realistic video speed (no boundary pauses)
-      if (!prefersReducedMotion && isIdle) {
-        targetFrameRef.current += autoPlayDirRef.current * 0.075;
-        if (targetFrameRef.current >= TOTAL_FRAMES - 1) {
-          targetFrameRef.current = TOTAL_FRAMES - 1;
-          autoPlayDirRef.current = -1;
-        } else if (targetFrameRef.current <= 0) {
+      if (!prefersReducedMotion) {
+        targetFrameRef.current += 0.1; // Slower, more cinematic forward speed
+        if (targetFrameRef.current >= TOTAL_FRAMES) {
           targetFrameRef.current = 0;
-          autoPlayDirRef.current = 1;
+          currentFrameRef.current = 0; // Prevent lerp snapping back
         }
       }
 
-      // Responsive lerp for natural video motion (0.09 interpolation factor)
+      // Responsive lerp for natural video motion
       const diff = targetFrameRef.current - currentFrameRef.current;
-      currentFrameRef.current += diff * 0.09;
+      currentFrameRef.current += diff * 0.1;
 
       // Draw active frame to canvas using object-fit: cover aspect math
       const frameIdx = Math.max(0, Math.min(TOTAL_FRAMES - 1, Math.round(currentFrameRef.current)));
@@ -163,10 +128,6 @@ export default function AnimatedHero() {
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
-      if (containerEl) {
-        containerEl.removeEventListener('mousemove', handleMouseMove);
-        containerEl.removeEventListener('touchmove', handleTouchMove);
-      }
       cancelAnimationFrame(animFrameId);
     };
   }, []);
@@ -182,6 +143,7 @@ export default function AnimatedHero() {
         alignItems: 'center',
         overflow: 'hidden',
         background: 'var(--color-bg)',
+        cursor: 'default',
       }}
     >
       {/* 1. Canvas Interactive Background */}
@@ -243,32 +205,6 @@ export default function AnimatedHero() {
         }}
       />
 
-      {/* 4. Interactive Scrubbing Hint Badge */}
-      <div
-        className="hero-hint-badge"
-        style={{
-          position: 'absolute',
-          top: '90px',
-          right: '2rem',
-          zIndex: 4,
-          background: 'var(--glass-bg)',
-          backdropFilter: 'blur(12px)',
-          WebkitBackdropFilter: 'blur(12px)',
-          border: '1px solid var(--glass-border)',
-          borderRadius: '2rem',
-          padding: '0.4rem 0.9rem',
-          fontSize: '0.78rem',
-          color: 'var(--color-text-secondary)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.5rem',
-          pointerEvents: 'none',
-        }}
-      >
-        <Sparkles size={14} style={{ color: 'var(--color-accent)' }} />
-        <span>Hover mouse across screen to interactively zoom 3D viewport</span>
-        {!isLoaded && <span style={{ opacity: 0.6 }}>({loadProgress}%)</span>}
-      </div>
 
       {/* 5. Clean, Professional Hero Content Block */}
       <div

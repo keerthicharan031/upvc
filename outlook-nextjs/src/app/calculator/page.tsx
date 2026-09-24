@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { SYSTEM_TYPES, PROFILE_COLORS, GLASS_TYPES, GST_RATE, MESH_COST_PER_UNIT } from '@/lib/data';
@@ -27,7 +27,7 @@ type FormData = z.infer<typeof schema>;
 function CalculatorContent() {
   const router = useRouter();
 
-  const { register, watch, handleSubmit } = useForm<FormData>({
+  const { register, control, handleSubmit } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: {
       width: 6,
@@ -41,32 +41,39 @@ function CalculatorContent() {
     },
   });
 
-  const values = watch();
+  const values = useWatch({ control });
 
-  function calcConfig(data: FormData): CalculatorConfig {
-    const sys = SYSTEM_TYPES.find((s) => s.id === data.systemId) || SYSTEM_TYPES[0];
-    const col = PROFILE_COLORS.find((c) => c.id === data.colorId) || PROFILE_COLORS[0];
-    const gls = GLASS_TYPES.find((g) => g.id === data.glassId) || GLASS_TYPES[0];
+  function calcConfig(data: Partial<FormData>): CalculatorConfig {
+    const safeData = data || {};
+    const width = safeData.width || 6;
+    const height = safeData.height || 4;
+    const qty = safeData.qty || 2;
+    const distance = safeData.distance || 10;
+    const mesh = safeData.mesh ?? true;
 
-    const totalArea = data.width * data.height * data.qty;
-    const material = Math.round(totalArea * sys.baseRate * col.baseCostMultiplier * gls.factor + (data.mesh ? MESH_COST_PER_UNIT * data.qty : 0));
-    const transport = Math.round(data.distance * 50);
+    const sys = SYSTEM_TYPES.find((s) => s.id === safeData.systemId) || SYSTEM_TYPES[0];
+    const col = PROFILE_COLORS.find((c) => c.id === safeData.colorId) || PROFILE_COLORS[0];
+    const gls = GLASS_TYPES.find((g) => g.id === safeData.glassId) || GLASS_TYPES[0];
+
+    const totalArea = width * height * qty;
+    const material = Math.round(totalArea * sys.baseRate * col.baseCostMultiplier * gls.factor + (mesh ? MESH_COST_PER_UNIT * qty : 0));
+    const transport = Math.round(distance * 50);
     const subtotal = material + transport;
     const gst = Math.round(subtotal * GST_RATE);
     const total = subtotal + gst;
 
     return {
-      width: data.width,
-      height: data.height,
-      qty: data.qty,
+      width,
+      height,
+      qty,
       systemType: sys.id,
       systemName: sys.name,
       color: col.name,
       glass: gls.name,
       lock: '',
-      mesh: data.mesh,
+      mesh,
       totalArea,
-      distance: data.distance,
+      distance,
       material,
       installation: 0,
       transport,

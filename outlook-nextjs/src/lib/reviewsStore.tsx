@@ -45,7 +45,10 @@ export function ReviewsProvider({ children }: { children: ReactNode }) {
   }, []);
 
   useEffect(() => {
-    void refreshReviews();
+    const timer = setTimeout(() => {
+      void refreshReviews();
+    }, 0);
+    return () => clearTimeout(timer);
   }, [refreshReviews]);
 
   const addReview = async (reviewData: Omit<Review, 'id' | 'date' | 'avatarBg'>): Promise<Review> => {

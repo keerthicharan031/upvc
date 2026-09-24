@@ -48,7 +48,7 @@ export default function UPIPaymentSlip() {
             marginBottom: '0.35rem',
           }}>
             <span style={{
-              fontFamily: '"Noto Sans Devanagari", "Mangal", sans-serif',
+              fontFamily: "'Noto Sans Devanagari', 'Mangal', sans-serif",
               fontSize: '1.05rem',
               fontWeight: 700,
               color: '#1a1a1a',
@@ -83,7 +83,7 @@ export default function UPIPaymentSlip() {
               fontSize: '1.1rem',
               fontWeight: 700,
               color: '#1a1a1a',
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'Georgia, \'Times New Roman\', serif',
               lineHeight: 1.2,
             }}>
               Union Bank<br />
@@ -126,7 +126,7 @@ export default function UPIPaymentSlip() {
             }}>
               <span style={{ color: '#e44d26', fontWeight: 800, fontSize: '0.7rem' }}>₹</span>
               <span>
-                <span style={{ fontFamily: '"Noto Sans Devanagari", sans-serif', fontSize: '0.55rem' }}>आन्ध्रा</span><br />
+                <span style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", fontSize: '0.55rem' }}>आन्ध्रा</span><br />
                 Andhra
               </span>
             </div>
@@ -144,7 +144,7 @@ export default function UPIPaymentSlip() {
             }}>
               <span style={{ fontSize: '0.75rem' }}>🏛️</span>
               <span>
-                <span style={{ fontFamily: '"Noto Sans Devanagari", sans-serif', fontSize: '0.55rem' }}>कॉर्पोरेशन</span><br />
+                <span style={{ fontFamily: "'Noto Sans Devanagari', sans-serif", fontSize: '0.55rem' }}>कॉर्पोरेशन</span><br />
                 Corporation
               </span>
             </div>
@@ -162,14 +162,14 @@ export default function UPIPaymentSlip() {
             color: '#111',
             letterSpacing: '0.08em',
             marginBottom: '0.15rem',
-            fontFamily: '"Arial", "Helvetica", sans-serif',
+            fontFamily: "'Arial', 'Helvetica', sans-serif",
           }}>
             OUTLOOK ENTERPRISES
           </p>
           <p style={{
             fontSize: '0.62rem',
             color: '#444',
-            fontFamily: '"Courier New", monospace',
+            fontFamily: "'Courier New', monospace",
             letterSpacing: '0.02em',
           }}>
             {UPI_ID}
@@ -216,7 +216,7 @@ export default function UPIPaymentSlip() {
                 fontWeight: 900,
                 color: '#1a1a1a',
                 letterSpacing: '0.06em',
-                fontFamily: '"Arial Black", "Impact", sans-serif',
+                fontFamily: "'Arial Black', 'Impact', sans-serif",
               }}>
                 BHIM
               </span>
@@ -224,7 +224,7 @@ export default function UPIPaymentSlip() {
                 fontSize: '1.6rem',
                 fontWeight: 900,
                 color: '#e44d26',
-                fontFamily: '"Arial Black", "Impact", sans-serif',
+                fontFamily: "'Arial Black', 'Impact', sans-serif",
               }}>
                 ▸▸
               </span>
@@ -245,7 +245,7 @@ export default function UPIPaymentSlip() {
                 fontWeight: 900,
                 color: '#1a1a1a',
                 letterSpacing: '0.04em',
-                fontFamily: '"Arial Black", "Impact", sans-serif',
+                fontFamily: "'Arial Black', 'Impact', sans-serif",
               }}>
                 UPI
               </span>
@@ -253,7 +253,7 @@ export default function UPIPaymentSlip() {
                 fontSize: '1.6rem',
                 fontWeight: 900,
                 color: '#4CAF50',
-                fontFamily: '"Arial Black", "Impact", sans-serif',
+                fontFamily: "'Arial Black', 'Impact', sans-serif",
               }}>
                 ▸▸
               </span>

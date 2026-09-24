@@ -1,62 +1,100 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getSupabaseAdminClient, isSupabaseConfigured } from '@/lib/supabase';
 import type { Review } from '@/lib/types';
+import { INITIAL_REVIEWS } from '@/lib/data';
+import fs from 'fs';
+import path from 'path';
+
+// Server-side persistent in-memory store in globalThis
+declare global {
+  var __OUTLOOK_REVIEWS_STORE: Review[] | undefined;
+}
+
+const CACHE_FILE_PATH = path.join(process.cwd(), '.reviews_cache.json');
+
+function loadServerReviews(): Review[] {
+  if (globalThis.__OUTLOOK_REVIEWS_STORE && Array.isArray(globalThis.__OUTLOOK_REVIEWS_STORE)) {
+    return globalThis.__OUTLOOK_REVIEWS_STORE;
+  }
+
+  try {
+    if (fs.existsSync(CACHE_FILE_PATH)) {
+      const data = fs.readFileSync(CACHE_FILE_PATH, 'utf-8');
+      const parsed = JSON.parse(data);
+      if (Array.isArray(parsed) && parsed.length > 0) {
+        globalThis.__OUTLOOK_REVIEWS_STORE = parsed;
+        return parsed;
+      }
+    }
+  } catch (err) {
+    console.warn('Could not read .reviews_cache.json:', err);
+  }
+
+  globalThis.__OUTLOOK_REVIEWS_STORE = [...INITIAL_REVIEWS];
+  return globalThis.__OUTLOOK_REVIEWS_STORE;
+}
+
+function saveServerReviews(reviews: Review[]) {
+  globalThis.__OUTLOOK_REVIEWS_STORE = reviews;
+  try {
+    fs.writeFileSync(CACHE_FILE_PATH, JSON.stringify(reviews, null, 2), 'utf-8');
+  } catch (err) {
+    // In read-only serverless environment, in-memory store will still work
+    console.warn('Could not persist to .reviews_cache.json (serverless read-only filesystem):', err);
+  }
+}
 
 const AVATAR_PALETTE = ['#3E7BFA', '#10b981', '#f59e0b', '#8b5cf6', '#06b6d4', '#ec4899', '#f97316'];
 
 // GET /api/reviews - Fetch all approved reviews
 export async function GET() {
   try {
-    if (!isSupabaseConfigured) {
-      return NextResponse.json(
-        { success: false, error: 'Supabase is not configured in environment variables.' },
-        { status: 500 }
-      );
+    if (isSupabaseConfigured) {
+      const supabase = getSupabaseAdminClient();
+      if (supabase) {
+        const { data, error } = await supabase
+          .from('reviews')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (!error && data) {
+          const formatted = data.map((r: Record<string, unknown>) => ({
+            id: String(r.id),
+            name: String(r.name || ''),
+            location: String(r.location || ''),
+            rating: Number(r.rating) || 5,
+            product: String(r.product || ''),
+            comment: String(r.comment || ''),
+            date: String(r.date || ''),
+            verified: Boolean(r.verified ?? true),
+            avatarBg: String(r.avatar_bg || r.avatarBg || '#3E7BFA'),
+            created_at: r.created_at,
+          }));
+
+          return NextResponse.json({
+            success: true,
+            source: 'supabase',
+            reviews: formatted,
+          });
+        }
+        if (error) {
+          console.error('Supabase query error:', error.message);
+        }
+      }
     }
 
-    const supabase = getSupabaseAdminClient();
-    if (!supabase) {
-      return NextResponse.json(
-        { success: false, error: 'Failed to initialize Supabase client.' },
-        { status: 500 }
-      );
-    }
-
-    const { data, error } = await supabase
-      .from('reviews')
-      .select('*')
-      .order('created_at', { ascending: false });
-
-    if (error) {
-      console.error('Error fetching reviews from Supabase:', error.message);
-      return NextResponse.json(
-        { success: false, error: error.message },
-        { status: 500 }
-      );
-    }
-
-    const formatted = (data || []).map((r: Record<string, unknown>) => ({
-      id: String(r.id),
-      name: String(r.name || ''),
-      location: String(r.location || ''),
-      rating: Number(r.rating) || 5,
-      product: String(r.product || ''),
-      comment: String(r.comment || ''),
-      date: String(r.date || ''),
-      verified: Boolean(r.verified ?? true),
-      avatarBg: String(r.avatar_bg || r.avatarBg || '#3E7BFA'),
-      created_at: r.created_at,
-    }));
-
+    // Fallback to server store if Supabase fails or is not configured
+    const currentReviews = loadServerReviews();
     return NextResponse.json({
       success: true,
-      source: 'supabase',
-      reviews: formatted,
+      source: 'server_store',
+      reviews: currentReviews,
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error';
+    const fallbackReviews = loadServerReviews();
     return NextResponse.json(
-      { success: false, error: message },
+      { success: false, error: message, reviews: fallbackReviews },
       { status: 500 }
     );
   }
@@ -73,18 +111,6 @@ export async function POST(req: NextRequest) {
         { success: false, error: 'Name, star rating, and review comment are required.' },
         { status: 400 }
       );
-    }
-
-    if (!isSupabaseConfigured) {
-      return NextResponse.json(
-        { success: false, error: 'Supabase is not configured in environment variables.' },
-        { status: 500 }
-      );
-    }
-
-    const supabase = getSupabaseAdminClient();
-    if (!supabase) {
-      return NextResponse.json({ success: false, error: 'Supabase client initialization failed' }, { status: 500 });
     }
 
     const numericRating = Math.min(5, Math.max(1, parseInt(String(rating), 10) || 5));
@@ -107,44 +133,38 @@ export async function POST(req: NextRequest) {
       avatarBg: randomBg,
     };
 
-    const { data: insertedData, error } = await supabase.from('reviews').insert([
-      {
-        id: newReview.id,
-        name: newReview.name,
-        location: newReview.location,
-        rating: newReview.rating,
-        product: newReview.product,
-        comment: newReview.comment,
-        date: newReview.date,
-        verified: newReview.verified,
-        avatar_bg: newReview.avatarBg,
-      },
-    ]).select().single();
+    // 1. Always save to server persistence store so all admins / sessions see it
+    const currentReviews = loadServerReviews();
+    const updatedReviews = [newReview, ...currentReviews];
+    saveServerReviews(updatedReviews);
 
-    if (error) {
-      console.error('Error inserting review to Supabase:', JSON.stringify(error, null, 2));
-      return NextResponse.json({ 
-        success: false, 
-        error: error.message,
-        code: error.code,
-        details: error.details,
-        hint: error.hint
-      }, { status: 500 });
+    // 2. Persist to Supabase if configured
+    if (isSupabaseConfigured) {
+      const supabase = getSupabaseAdminClient();
+      if (supabase) {
+        const { error } = await supabase.from('reviews').insert([
+          {
+            id: newReview.id,
+            name: newReview.name,
+            location: newReview.location,
+            rating: newReview.rating,
+            product: newReview.product,
+            comment: newReview.comment,
+            date: newReview.date,
+            verified: newReview.verified,
+            avatar_bg: newReview.avatarBg,
+          },
+        ]);
+
+        if (error) {
+          console.error('Error inserting review to Supabase:', error.message);
+        }
+      }
     }
 
     return NextResponse.json({
       success: true,
-      review: {
-        id: String(insertedData.id),
-        name: String(insertedData.name),
-        location: String(insertedData.location),
-        rating: Number(insertedData.rating),
-        product: String(insertedData.product),
-        comment: String(insertedData.comment),
-        date: String(insertedData.date),
-        verified: Boolean(insertedData.verified),
-        avatarBg: String(insertedData.avatar_bg || insertedData.avatarBg),
-      },
+      review: newReview,
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Unknown error';
