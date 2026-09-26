@@ -44,7 +44,7 @@ export default function CompanyLogo({ size = 44, showText = true, className = ''
         }}
       >
         <Image
-          src="/logo.png"
+          src="/outlook-logo.png"
           alt="Outlook Enterprises Logo"
           width={size}
           height={size}
