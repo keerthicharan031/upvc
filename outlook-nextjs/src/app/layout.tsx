@@ -6,7 +6,6 @@ import { ReviewsProvider } from '@/lib/reviewsStore';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import WhatsAppFloat from '@/components/ui/WhatsAppFloat';
-import CustomCursor from '@/components/ui/CustomCursor';
 import CinematicBackground from '@/components/ui/CinematicBackground';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
@@ -56,7 +55,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <LeadProvider>
             <ReviewsProvider>
               <CinematicBackground opacity={0.92} />
-              <CustomCursor />
               <Navbar />
               <main>{children}</main>
               <Footer />
