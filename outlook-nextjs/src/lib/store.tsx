@@ -148,17 +148,44 @@ export function LeadProvider({ children }: { children: ReactNode }) {
         loadFromStorage();
       }
     };
-
     const handleCustomSync = () => {
       loadFromStorage();
     };
-
     window.addEventListener('storage', handleStorageChange);
     window.addEventListener(LEADS_SYNC_EVENT, handleCustomSync);
+
+    // Fallback polling every 15s in case realtime drops or isn't enabled
+    const intervalId = setInterval(() => {
+      refreshLeads();
+    }, 15000);
+
+    // Supabase Real-time setup
+    let channel: any = null;
+    import('@/lib/supabase').then(({ getSupabaseClient }) => {
+      const supabase = getSupabaseClient();
+      if (supabase) {
+        channel = supabase
+          .channel('schema-db-changes')
+          .on(
+            'postgres_changes',
+            { event: '*', schema: 'public', table: 'leads' },
+            () => {
+              refreshLeads(); // Fetch new data when anything changes
+            }
+          )
+          .subscribe();
+      }
+    });
 
     return () => {
       window.removeEventListener('storage', handleStorageChange);
       window.removeEventListener(LEADS_SYNC_EVENT, handleCustomSync);
+      clearInterval(intervalId);
+      if (channel) {
+        import('@/lib/supabase').then(({ getSupabaseClient }) => {
+          getSupabaseClient()?.removeChannel(channel);
+        });
+      }
     };
   }, [loadFromStorage, refreshLeads]);
 

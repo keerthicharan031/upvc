@@ -86,10 +86,14 @@ export async function GET() {
           .order('created_at', { ascending: false });
 
         if (!error && data) {
+          const leadsWithProduct = data.map((d: any) => ({
+            ...d,
+            product: d.notes ? String(d.notes).split('\n')[0] : 'Unknown Product',
+          }));
           return NextResponse.json({
             success: true,
             source: 'supabase',
-            leads: data as Lead[],
+            leads: leadsWithProduct as Lead[],
             isConfigured: true,
           });
         }
@@ -175,12 +179,11 @@ export async function POST(req: NextRequest) {
             name: newLead.name,
             phone: newLead.phone,
             email: newLead.email,
-            product: newLead.product,
             area: newLead.area,
             value: newLead.value,
             status: newLead.status,
             date: newLead.date,
-            notes: newLead.notes,
+            notes: newLead.product + (newLead.notes ? '\n\nNotes: ' + newLead.notes : ''),
             source: newLead.source,
             config: newLead.config,
           },
