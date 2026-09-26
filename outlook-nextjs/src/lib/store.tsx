@@ -164,13 +164,15 @@ export function LeadProvider({ children }: { children: ReactNode }) {
     import('@/lib/supabase').then(({ getSupabaseClient }) => {
       const supabase = getSupabaseClient();
       if (supabase) {
+        // Use a unique channel name to prevent Strict Mode double-subscription errors
+        const channelName = `db-changes-${Date.now()}-${Math.random()}`;
         channel = supabase
-          .channel('schema-db-changes')
+          .channel(channelName)
           .on(
             'postgres_changes',
             { event: '*', schema: 'public', table: 'leads' },
             () => {
-              refreshLeads(); // Fetch new data when anything changes
+              refreshLeads();
             }
           )
           .subscribe();
