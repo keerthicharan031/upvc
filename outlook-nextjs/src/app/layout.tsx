@@ -31,13 +31,9 @@ export const metadata: Metadata = {
     siteName: 'Outlook Enterprises',
   },
   icons: {
-    icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon.png', type: 'image/png' },
-    ],
-    apple: [
-      { url: '/favicon.png' },
-    ],
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
   },
 };
 
